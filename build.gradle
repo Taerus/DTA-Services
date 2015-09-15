@@ -1,0 +1,88 @@
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'maven'
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+group = 'com.dta.services'
+version = '1.0-SNAPSHOT'
+
+description = """DTA-Services"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url 'http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo/'
+    }
+}
+
+dependencies {
+    ext.springVersion='3.1.1.RELEASE'
+    compile         'org.springframework:spring-core:'      + springVersion
+    compile         'org.springframework:spring-web:'       + springVersion
+    compile         'org.springframework:spring-webmvc:'    + springVersion
+    compile         'org.springframework:spring-orm:'       + springVersion
+    compile         'org.springframework.security:spring-security-web:'     + springVersion
+    compile         'org.springframework.security:spring-security-config:'  + springVersion
+
+    compile group: 'javax.servlet:servlet-api:2.5'
+    compile group: 'javax.servlet.jsp:jsp-api:2.1'
+    compile group: 'jstl:jstl:1.2'
+
+    compile group: 'org.codehaus.jackson:jackson-mapper-asl:1.8.5'
+    compile group: 'javax.xml.bind:jaxb-api:2.2.11'
+    compile group: 'javax.xml:jaxb-impl:2.1'
+
+    compile         'org.eclipse.persistence:eclipselink:2.6.0'
+    compile         'org.eclipse.persistence:javax.persistence:2.0.0'
+    compile         'javax.validation:validation-api:1.0.0.GA'
+    compile         'org.hibernate:hibernate-validator:4.2.0.Final'
+    compile         'mysql:mysql-connector-java:5.1.35'
+
+    compile         'org.aspectj:aspectjrt:1.6.11'
+    compile         'org.aspectj:aspectjweaver:1.6.11'
+    compile         'cglib:cglib-nodep:2.2.2'
+
+    compile         'org.apache.logging.log4j:log4j-api:2.3'
+    compile         'org.apache.logging.log4j:log4j-core:2.3'
+
+    testCompile     'junit:junit:4.+'
+    testCompile group: 'org.springframework', name: 'spring-test', version:'3.1.1.RELEASE'
+}
+
+
+// Convert scss/sass to css
+apply plugin: "com.github.robfletcher.compass"
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://dl.bintray.com/robfletcher/gradle-plugins" }
+    }
+    dependencies {
+        classpath "com.github.robfletcher:compass-gradle-plugin:2.0.5"
+    }
+}
+
+compass {
+    cssDir = file("src/main/webapp/resources/css")
+    sassDir = file("src/main/webapp/resources/sass")
+}
+
+
+// Embeded Jetty for testing
+jettyRun{
+    contextPath = "/"
+    httpPort = 8080
+    reload = "automatic"
+    scanIntervalSeconds = 1
+}
+
+jettyRunWar{
+    contextPath = "/"
+    httpPort = 8080
+}
