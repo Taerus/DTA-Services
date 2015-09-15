@@ -25,7 +25,7 @@
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="Bankonet_PU" />
+        <property name="persistenceUnitName" value="PU_DTA_SERVICES" />
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan" >
             <list>
@@ -51,40 +51,6 @@
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
-
-
-    <!--Services-->
-    <bean id="reportService" class="com.bankonet.metier.ReportService" scope="prototype">
-        <!--Injection par setter-->
-        <!--<property name="reportGenerator" ref="htmlReportGenerator"/>-->
-
-        <!--Injection par constructeur-->
-        <constructor-arg name="reportGenerator" ref="pdfReportGenerator" />
-    </bean>
-
-    <!--Report Generators-->
-    <bean id="htmlReportGenerator" class="com.bankonet.report.ReportFactory" factory-method="createReport">
-        <constructor-arg name="reportType" value="html" />
-    </bean>
-
-    <bean id="pdfReportGenerator" class="com.bankonet.report.ReportFactory" factory-method="createReport">
-        <constructor-arg name="reportType" value="pdf" />
-    </bean>
-
-    <!--Model-->
-    <bean id="client" class="com.bankonet.model.Client" scope="prototype">
-        <constructor-arg name="id" value="0" />
-        <constructor-arg name="login" value="jsmith" />
-        <constructor-arg name="password" value="I8neo418" />
-        <constructor-arg name="firstname" value="John" />
-        <constructor-arg name="lastname" value="Smith" />
-    </bean>
-
-    <bean id="address" class="com.bankonet.model.Address" scope="prototype">
-        <constructor-arg name="number" value="42" />
-        <constructor-arg name="street" value="rue des primevères" />
-        <constructor-arg name="city" value="Nantes" />
     </bean>
 
 </beans>
