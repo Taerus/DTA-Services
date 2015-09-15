@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="com.dta.services" />
+    <aop:aspectj-autoproxy />
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="Bankonet_PU" />
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" >
+            <list>
+                <value>com.bankonet.model</value>
+            </list>
+        </property>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+                <property name="showSql" value="false"/>
+                <property name="generateDdl" value="true"/>
+                <property name="databasePlatform" value="org.eclipse.persistence.platform.database.MySQLPlatform" />
+            </bean>
+        </property>
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect" />
+        </property>
+        <property name="jpaPropertyMap">
+            <props>
+                <prop key="eclipselink.weaving">static</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+
+    <!--Services-->
+    <bean id="reportService" class="com.bankonet.metier.ReportService" scope="prototype">
+        <!--Injection par setter-->
+        <!--<property name="reportGenerator" ref="htmlReportGenerator"/>-->
+
+        <!--Injection par constructeur-->
+        <constructor-arg name="reportGenerator" ref="pdfReportGenerator" />
+    </bean>
+
+    <!--Report Generators-->
+    <bean id="htmlReportGenerator" class="com.bankonet.report.ReportFactory" factory-method="createReport">
+        <constructor-arg name="reportType" value="html" />
+    </bean>
+
+    <bean id="pdfReportGenerator" class="com.bankonet.report.ReportFactory" factory-method="createReport">
+        <constructor-arg name="reportType" value="pdf" />
+    </bean>
+
+    <!--Model-->
+    <bean id="client" class="com.bankonet.model.Client" scope="prototype">
+        <constructor-arg name="id" value="0" />
+        <constructor-arg name="login" value="jsmith" />
+        <constructor-arg name="password" value="I8neo418" />
+        <constructor-arg name="firstname" value="John" />
+        <constructor-arg name="lastname" value="Smith" />
+    </bean>
+
+    <bean id="address" class="com.bankonet.model.Address" scope="prototype">
+        <constructor-arg name="number" value="42" />
+        <constructor-arg name="street" value="rue des primevères" />
+        <constructor-arg name="city" value="Nantes" />
+    </bean>
+
+</beans>
