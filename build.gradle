@@ -29,13 +29,13 @@ dependencies {
     compile         'org.springframework.security:spring-security-web:'     + springVersion
     compile         'org.springframework.security:spring-security-config:'  + springVersion
 
-    compile group: 'javax.servlet:servlet-api:2.5'
-    compile group: 'javax.servlet.jsp:jsp-api:2.1'
-    compile group: 'jstl:jstl:1.2'
+    compile         'javax.servlet:servlet-api:2.5'
+    compile         'javax.servlet.jsp:jsp-api:2.1'
+    compile         'jstl:jstl:1.2'
 
-    compile group: 'org.codehaus.jackson:jackson-mapper-asl:1.8.5'
-    compile group: 'javax.xml.bind:jaxb-api:2.2.11'
-    compile group: 'javax.xml:jaxb-impl:2.1'
+    compile         'org.codehaus.jackson:jackson-mapper-asl:1.8.5'
+    compile         'javax.xml.bind:jaxb-api:2.2.11'
+    compile         'javax.xml:jaxb-impl:2.1'
 
     compile         'org.eclipse.persistence:eclipselink:2.6.0'
     compile         'org.eclipse.persistence:javax.persistence:2.0.0'
@@ -51,7 +51,7 @@ dependencies {
     compile         'org.apache.logging.log4j:log4j-core:2.3'
 
     testCompile     'junit:junit:4.+'
-    testCompile group: 'org.springframework', name: 'spring-test', version:'3.1.1.RELEASE'
+    testCompile     'org.springframework:spring-test:' + springVersion
 }
 
 
