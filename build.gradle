@@ -76,13 +76,13 @@ compass {
 
 // Embeded Jetty for testing
 jettyRun{
-    contextPath = "/"
+    contextPath = "/DTA-Services"
     httpPort = 8080
     reload = "automatic"
     scanIntervalSeconds = 1
 }
 
 jettyRunWar{
-    contextPath = "/"
+    contextPath = "/DTA-Services"
     httpPort = 8080
 }
