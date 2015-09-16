@@ -10,12 +10,16 @@
 	<c:import url="_SCRIPT_.jsp"></c:import>
 </head>
 <body>
-	<c:import url="_HEADER_.jsp"></c:import>
-	<div class="container">
+	<header>
+		<c:import url="_HEADER_.jsp"></c:import>
+	</header>
+	<main class="container">
 		<div class="row">
 			<p><spring:message code="page.home.welcome"></spring:message></p>
 		</div>
-	</div>
-	<c:import url="_FOOTER_.jsp"></c:import>
+	</main>
+	<footer>
+		<c:import url="_FOOTER_.jsp"></c:import>
+	</footer>
 </body>
 </html>
