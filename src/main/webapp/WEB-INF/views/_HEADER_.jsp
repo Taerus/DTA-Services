@@ -7,7 +7,7 @@
 			
 			<ul class="nav navbar-nav">
 				<li><a href="/"><spring:message code="page.header.members"></spring:message></a></li>
-				<li><a href="/"><spring:message code="page.header.adverts"></spring:message></a></li>
+				<li><a href="/DTA-Services/adverts/"><spring:message code="page.header.adverts"></spring:message></a></li>
 			</ul>
 			
 			<form class="navbar-form navbar-right">
