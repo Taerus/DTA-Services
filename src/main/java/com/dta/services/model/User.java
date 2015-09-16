@@ -1,6 +1,8 @@
 package com.dta.services.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -20,6 +22,7 @@ public class User {
 	
 	private String email;
 	
+	@Enumerated(EnumType.STRING)
 	private Role role;
 	
 	
