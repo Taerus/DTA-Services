@@ -31,9 +31,7 @@ public class Advert {
     public Advert() {
     }
     
-    public Advert(long id, String title, Date creation, String description,
-			int price, AdvertType type, Category category) {
-		this.id = id;
+    public Advert(String title, Date creation, String description, int price, AdvertType type, Category category) {
 		this.title = title;
 		this.creation = creation;
 		this.description = description;
