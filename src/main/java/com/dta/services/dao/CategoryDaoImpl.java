@@ -3,15 +3,17 @@ package com.dta.services.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.dta.services.model.Category;
 
+@Repository("categoryDao")
 public class CategoryDaoImpl implements ICategoryDao {
 
-	@Autowired
+	@PersistenceContext
 	EntityManager em;
 	
 	@Override
