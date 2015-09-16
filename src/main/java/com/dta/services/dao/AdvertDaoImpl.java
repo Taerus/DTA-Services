@@ -20,7 +20,7 @@ public class AdvertDaoImpl implements IAdvertDao {
 	}
 
 	@Override
-	public Advert getById(int id) {
+	public Advert getById(long id) {
 		return em.find(Advert.class, id);
 	}
 

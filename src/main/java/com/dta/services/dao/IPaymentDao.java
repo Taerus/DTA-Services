@@ -6,7 +6,7 @@ import com.dta.services.model.Payment;
 
 public interface IPaymentDao {
 	void create(Payment payment);
-	Payment getById(int id);
+	Payment getById(long id);
 	List<Payment> list();
 	void update(Payment payment);
 	void delete(int id);

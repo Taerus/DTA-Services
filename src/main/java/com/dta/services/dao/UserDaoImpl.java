@@ -20,7 +20,7 @@ public class UserDaoImpl implements IUserDao {
 	}
 
 	@Override
-	public User getById(int id) {
+	public User getById(long id) {
 		return em.find(User.class, id);
 	}
 

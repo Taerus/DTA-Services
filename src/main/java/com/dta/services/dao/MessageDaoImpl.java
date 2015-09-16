@@ -20,7 +20,7 @@ public class MessageDaoImpl implements IMessageDao {
 	}
 
 	@Override
-	public Message getById(int id) {
+	public Message getById(long id) {
 		return em.find(Message.class, id);
 	}
 

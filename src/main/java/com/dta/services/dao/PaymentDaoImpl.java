@@ -23,7 +23,7 @@ public class PaymentDaoImpl implements IPaymentDao {
 	}
 
 	@Override
-	public Payment getById(int id) {
+	public Payment getById(long id) {
 		// TODO Auto-generated method stub
 		return em.find(Payment.class, id);
 	}

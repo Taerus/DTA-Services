@@ -23,7 +23,7 @@ public class CategoryDaoImpl implements ICategoryDao {
 	}
 
 	@Override
-	public Category getById(int id) {
+	public Category getById(long id) {
 		// TODO Auto-generated method stub
 		return em.find(Category.class, id);
 	}
