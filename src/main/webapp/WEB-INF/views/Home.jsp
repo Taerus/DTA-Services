@@ -16,5 +16,6 @@
 			<p><spring:message code="page.home.welcome"></spring:message></p>
 		</div>
 	</div>
+	<c:import url="_FOOTER_.jsp"></c:import>
 </body>
 </html>
