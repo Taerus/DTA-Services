@@ -29,7 +29,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan" >
             <list>
-                <value>com.bankonet.model</value>
+                <value>com.dta.services.model</value>
             </list>
         </property>
         <property name="jpaVendorAdapter">
