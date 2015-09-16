@@ -29,9 +29,7 @@ public class Payment {
     public Payment() {
     }
 
-	public Payment(long id, User user1, User user2, Date creation, int amount,
-			StatePayment state) {
-		this.id = id;
+	public Payment(User user1, User user2, Date creation, int amount, StatePayment state) {
 		this.user1 = user1;
 		this.user2 = user2;
 		this.creation = creation;

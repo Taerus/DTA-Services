@@ -26,11 +26,8 @@ public class User {
 	/*Constructors*/
     public User() {
     }
-
-	public User(long id, String login, String password, int balance,
-			String email, Role role) {
-		super();
-		this.id = id;
+    
+	public User(String login, String password, int balance, String email, Role role) {
 		this.login = login;
 		this.password = password;
 		this.balance = balance;

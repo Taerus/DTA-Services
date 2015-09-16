@@ -30,11 +30,15 @@ public abstract class Message {
 
     // -------- getter / setter --------
 
+    public long getId() {
+		return id;
+	}
+    
     public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+	public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -42,7 +46,11 @@ public abstract class Message {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setContent(String content) {
         this.content = content;
     }
 
