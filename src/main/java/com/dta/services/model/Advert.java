@@ -2,9 +2,7 @@ package com.dta.services.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Advert {
@@ -17,13 +15,16 @@ public class Advert {
 	private String title;
 	
 	private Date creation;
-	
+
+	@Column(length = 4096)
 	private String description;
 	
 	private int price;
 	
 	private AdvertType type;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "category_id")
 	private Category category; 
 	
 	
