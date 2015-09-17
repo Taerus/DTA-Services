@@ -45,7 +45,7 @@ public class HomeController {
 		
 		userService.createUser(user);
 		
-		return "Home";
+		return "Registered";
 	}
 
 }
