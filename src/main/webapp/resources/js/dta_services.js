@@ -11,7 +11,6 @@ angular.module("dta_services", [])
 	
 	advert.getAll().then(function(adverts){
 		advert.list = adverts;
-		console.log(adverts);
 	});
 	
 }]);

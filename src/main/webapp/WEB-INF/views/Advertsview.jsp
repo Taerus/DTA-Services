@@ -25,11 +25,11 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td ng-repeat="ad in advert.list">{{ ad.category_id.name }}</td>
-						<td ng-repeat="ad in advert.list">{{ ad.title }}</td>
-						<td ng-repeat="ad in advert.list">{{ ad.creation | timedate }}</td>
-						<td ng-repeat="ad in advert.list">{{ ad.description }}</td>
-						<td ng-repeat="ad in advert.list">{{ ad.price }}</td>
+						<td ng-repeat="item in advert.list">{{ item.category_id.name }}</td>
+						<td ng-repeat="item in advert.list">{{ item.title }}</td>
+						<td ng-repeat="item in advert.list">{{ item.creation | date }}</td>
+						<td ng-repeat="item in advert.list">{{ item.description }}</td>
+						<td ng-repeat="item in advert.list">{{ item.price }}</td>
 					</tr>
 				</tbody>
 			</table>
