@@ -15,7 +15,9 @@
 	</header>
 	<main class="container">
 		<div class="row">
-			<p><spring:message code="page.home.welcome"></spring:message></p>
+			<div class="alert alert-success">
+				<p><spring:message code="page.registered.newUser"></spring:message></p>
+			</div>
 		</div>
 	</main>
 	<footer>

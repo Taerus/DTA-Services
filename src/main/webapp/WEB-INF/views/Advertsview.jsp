@@ -8,6 +8,7 @@
 	<title><spring:message code="page.home.title"></spring:message></title>
 	<c:import url="_STYLESHEETS_.jsp"></c:import>
 	<c:import url="_SCRIPT_.jsp"></c:import>
+	<script src="/DTA-Services/js/dta_services.js"></script>
 </head>
 <body ng-app="dta_services">
 	<c:import url="_HEADER_.jsp"></c:import>
