@@ -4,12 +4,16 @@ import javax.validation.Valid;
 
 import com.dta.services.model.AdvertType;
 import com.dta.services.service.IAdvertService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.dta.services.model.Advert;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,6 +23,7 @@ import com.dta.services.service.IUserService;
 import com.dta.services.utils.PasswordEncoder;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -60,7 +65,7 @@ public class HomeController {
 		return "Registered";
 	}
 	
-	@RequestMapping(value="users",method=RequestMethod.GET)
+	@RequestMapping(value="users")
 	public String viewUsers(){
 		return "Usersview";
 	}
@@ -81,7 +86,7 @@ public class HomeController {
 	}
 
     @RequestMapping(value = "advert/new", method = RequestMethod.POST)
-    public String postAdvert(@Valid Advert advert, Model model, BindingResult bindingResult) {
+    public String postAdvert(@Valid Advert advert, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
 			return "PostAdvert";
@@ -92,6 +97,14 @@ public class HomeController {
 		advertService.createAdvert(advert);
 
         return "redirect:/";
+    }
+    
+    @RequestMapping(value="advert/show/{id}", method = RequestMethod.GET)
+    public String showAdvert(@PathVariable long id, Model model){
+    	
+    	List<Advert> adverts = advertService.list();
+    	
+    	return "Advertshow";
     }
 
 }
