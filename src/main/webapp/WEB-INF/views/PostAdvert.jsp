@@ -31,8 +31,12 @@
                 <div class="col-md-10"><f:textarea path="description" id="description" cssClass="form-control" rows="8" /></div>
             </div>
             <div class="form-group">
+                <label for="price" class="control-label col-md-2"><spring:message code="page.postAdvert.form.price" /></label>
+                <div class="col-md-10"><f:input path="price" id="price" type="number" cssClass="form-control" /></div>
+            </div>
+            <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <button type="submit"><spring:message code="page.postAdvert.form.submit" /></button>
+                    <button type="submit" class="btn btn-success"><spring:message code="page.postAdvert.form.submit" /></button>
                 </div>
             </div>
 		</f:form>

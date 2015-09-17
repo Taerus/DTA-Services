@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="warn">
+<Configuration status="debug">
 
     <Properties>
-        <Property name="filename">target/test.log</Property>
+        <Property name="filename">dta-services.log</Property>
     </Properties>
 
     <Appenders>
         <Console name="stdout" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %c %M%n%-5p: %m%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %c %M%n%-5p: %m%n" />
         </Console>
-        <File name="file" fileName="${filename}">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %c %M - %-5p: %m%n"/>
+        <File name="main-file" fileName="${filename}">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %c %M - %-5p: %m%n" />
         </File>
     </Appenders>
 
     <Loggers>
-        <Root level="debug">
-            <AppenderRef ref="stdout"/>
-            <AppenderRef ref="file"/>
+        <Root level="info">
+            <AppenderRef ref="stdout" />
         </Root>
+        <Logger name="com.dta.services" level="debug">
+            <AppenderRef ref="stdout" />
+            <AppenderRef ref="main-file" />
+        </Logger>
     </Loggers>
 
 </Configuration>

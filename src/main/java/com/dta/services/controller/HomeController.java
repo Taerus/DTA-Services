@@ -2,6 +2,8 @@ package com.dta.services.controller;
 
 import javax.validation.Valid;
 
+import com.dta.services.model.AdvertType;
+import com.dta.services.service.IAdvertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.dta.services.model.Advert;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,8 @@ import com.dta.services.model.User;
 import com.dta.services.service.IUserService;
 import com.dta.services.utils.PasswordEncoder;
 
+import java.util.Date;
+
 
 @Controller
 @RequestMapping("/")
@@ -23,6 +27,9 @@ public class HomeController {
 
 	@Autowired
 	private IUserService userService;
+
+	@Autowired
+	private IAdvertService advertService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -65,16 +72,26 @@ public class HomeController {
 
 	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
 	public String postAdvert(Model model) {
-        model.addAttribute("advert", new Advert());
+        Advert advert = new Advert();
+        advert.setPrice(1);
+
+        model.addAttribute("advert", advert);
 
 		return "PostAdvert";
 	}
 
     @RequestMapping(value = "advert/new", method = RequestMethod.POST)
-    public String postAdvert(Advert advert, Model model) {
-        // TODO persist new advert
+    public String postAdvert(@Valid Advert advert, Model model, BindingResult bindingResult) {
 
-        return "redirect:/DTA-Services/";
+		if (bindingResult.hasErrors()) {
+			return "PostAdvert";
+		}
+
+        advert.setType(AdvertType.ADVERT);
+        advert.setCreation(new Date());
+		advertService.createAdvert(advert);
+
+        return "redirect:/";
     }
 
 }

@@ -7,5 +7,7 @@ import com.dta.services.model.Advert;
 public interface IAdvertService {
 
 	public List<Advert> list();
+
+	public void createAdvert(Advert advert);
 	
 }
