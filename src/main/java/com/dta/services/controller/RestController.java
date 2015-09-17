@@ -29,7 +29,7 @@ public class RestController {
 		return userService.getAll();
 	}
 	
-	@RequestMapping(value="/advert", method = RequestMethod.GET)
+	@RequestMapping(value="/adverts", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Advert> getAdverts () {
 		return advert.list();

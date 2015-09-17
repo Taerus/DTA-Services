@@ -12,29 +12,35 @@
 </head>
 <body ng-app="dta_services">
 	<c:import url="_HEADER_.jsp"></c:import>
-	<div class="container" ng-controller="AdvertController as advert">
+	<div class="container" ng-controller="AdvertsController as advertsController">
 		<div class="form-inline">
 			<div class="form-group">
-				<input class="form-control" type="text" ng-model="search.category.name" />
+				<input class="form-control" type="text" ng-model="advertsController.search.category.name" placeholder="Recherche par catégorie" />
 			</div>
 		</div>
-		<table class="table">
+		<table class="table table-header-clickable">
 			<thead>
 				<tr>
-					<th>Category</th>
+					<th ng-click="advertsController.setPredicate('category.name')">Category
+					<span ng-if="advertsController.predicate==='category.name'" class="glyphicon glyphicon-chevron-down"></span>
+					<span ng-if="advertsController.predicate==='-category.name'" class="glyphicon glyphicon-chevron-up"></span></th>
 					<th>Title</th>
 					<th>Date of creation</th>
 					<th>Description</th>
-					<th>Price</th>
+					<th ng-click="advertsController.setPredicate('price')">Price
+					<span ng-if="advertsController.predicate==='price'" class="glyphicon glyphicon-chevron-down"></span>
+					<span ng-if="advertsController.predicate==='-price'" class="glyphicon glyphicon-chevron-up"></span></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="item in advert.list | filter:search:strict">
-					<td>{{ item.category.name }}</td>
-					<td>{{ item.title }}</td>
-					<td>{{ item.creation | date }}</td>
-					<td>{{ item.description }}</td>
-					<td>{{ item.price }}</td>
+				<tr ng-repeat="advert in advertsController.adverts | filter:advertsController.search:strict | orderBy:advertsController.predicate">
+					<td>{{ advert.category.name }}</td>
+					<td>{{ advert.title }}</td>
+					<td>{{ advert.creation | date }}</td>
+					<td>{{ advert.description }}</td>
+					<td>{{ advert.price }}</td>
+					<td><a href=""><span class="glyphicon glyphicon-search"></span></a></td>
 				</tr>
 			</tbody>
 		</table>
