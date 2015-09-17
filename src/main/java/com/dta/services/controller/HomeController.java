@@ -47,5 +47,10 @@ public class HomeController {
 		
 		return "Home";
 	}
+	
+	@RequestMapping(value="/users",method=RequestMethod.GET)
+	public String viewUsers(){
+		return "Usersview";
+	}
 
 }
