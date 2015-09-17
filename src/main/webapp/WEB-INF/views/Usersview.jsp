@@ -17,22 +17,26 @@
 	<main class="container" ng-controller="UsersController as usersController">
 		<div class="form-inline">
 			<div class="form-group">
-				<input class="form-control" type="text" ng-model="usersController.searchCriteria" placeholder="<spring:message code="page.users.search" />"/>
+				<input class="form-control" type="text" ng-model="usersController.search.login" placeholder="<spring:message code="page.users.search" />"/>
 			</div>
 		</div>
-		<table class="table table-striped">
+		<table class="table table-striped table-header-clickable">
 			<thead>
 				<tr>
-					<th>
-						<spring:message code="page.users.login"></spring:message>
+					<th ng-click="usersController.setPredicate('login')">																			
+						<spring:message code="page.users.login"></spring:message> 
+						<span ng-if="usersController.predicate==='login'" class="glyphicon glyphicon-chevron-down"></span>
+						<span ng-if="usersController.predicate==='-login'" class="glyphicon glyphicon-chevron-up"></span>						
 					</th>
-					<th>
+					<th ng-click="usersController.setPredicate('email')">
 						<spring:message code="page.users.email"></spring:message>
+						<span ng-if="usersController.predicate==='email'" class="glyphicon glyphicon-chevron-down"></span>
+						<span ng-if="usersController.predicate==='-email'" class="glyphicon glyphicon-chevron-up"></span>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="user in usersController.users | filter:usersController.searchCriteria ">
+				<tr ng-repeat="user in usersController.users | filter:usersController.search | orderBy:usersController.predicate">
 					<td>{{user.login}}</td><td>{{user.email}}</td>
 				</tr>
 			</tbody>

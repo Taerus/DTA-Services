@@ -1,0 +1,6 @@
+.table-header-clickable thead th{
+	cursor:pointer;
+}
+.table-header-clickable thead th:hover{
+	color:#000;
+}
