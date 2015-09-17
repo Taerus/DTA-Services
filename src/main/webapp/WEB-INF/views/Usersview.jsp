@@ -17,7 +17,7 @@
 	<main class="container" ng-controller="UsersController as usersController">
 		<div class="form-inline">
 			<div class="form-group">
-				<input class="form-control" type="text" ng-model="usersController.searchCriteria" placeholder="<spring:message code="page.users.search" />"/>
+				<input class="form-control" type="text" ng-model="usersController.search.login" placeholder="<spring:message code="page.users.search" />"/>
 			</div>
 		</div>
 		<table class="table table-striped">
@@ -32,7 +32,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="user in usersController.users | filter:usersController.searchCriteria ">
+				<tr ng-repeat="user in usersController.users | filter:usersController.search ">
 					<td>{{user.login}}</td><td>{{user.email}}</td>
 				</tr>
 			</tbody>
