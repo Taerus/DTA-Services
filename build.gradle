@@ -29,7 +29,7 @@ dependencies {
     compile         'org.springframework.security:spring-security-web:'     + springVersion
     compile         'org.springframework.security:spring-security-config:'  + springVersion
 
-    compile         'javax.servlet:javax.servlet-api:2.5'
+    compile         'javax.servlet:servlet-api:2.5'
     compile         'javax.servlet.jsp:jsp-api:2.1'
     compile         'jstl:jstl:1.2'
 
@@ -76,13 +76,13 @@ compass {
 
 // Embeded Jetty for testing
 jettyRun{
-    contextPath = "/"
+    contextPath = "/DTA-Services"
     httpPort = 8080
     reload = "automatic"
     scanIntervalSeconds = 1
 }
 
 jettyRunWar{
-    contextPath = "/"
+    contextPath = "/DTA-Services"
     httpPort = 8080
 }
