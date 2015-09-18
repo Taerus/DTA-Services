@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
+
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/DTA-Services"><spring:message code="page.header.title"></spring:message></a>
@@ -10,12 +13,22 @@
 			<li><a href="/DTA-Services/adverts/"><spring:message code="page.header.adverts"></spring:message></a></li>
 		</ul>
 		
-		<form class="navbar-form navbar-right">
-			<input class="form-control" type="text" placeholder="<spring:message code="page.header.login"></spring:message>"/>
-			<input class="form-control" type="password" placeholder="<spring:message code="page.header.password"></spring:message>" />
-			<button type="submit" class="btn btn-success"><spring:message code="page.header.signin"></spring:message></button>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" ><spring:message code="page.header.register"></spring:message></button>				
-		</form>
+		<s:authorize access="hasRole('USER')">
+			<ul class="nav navbar-nav navbar-right">
+			
+				<li><a href="/DTA-Services/j_spring_security_logout"><spring:message code="page.header.logout" /> </a></li>
+			</ul>
+			<p class="navbar-text navbar-right"><spring:message code="page.header.signedin" /> <a href="#" class="navbar-link"><s:authentication property="principal.username" /></a></p>
+		</s:authorize>
+		
+		<s:authorize access="isAnonymous()">
+			<form class="navbar-form navbar-right" action="<c:out value='/DTA-Services/j_spring_security_check'/>" method="POST">
+				<input class="form-control" name="j_username" type="text" placeholder="<spring:message code="page.header.login"></spring:message>"/>
+				<input class="form-control" name="j_password" type="password" placeholder="<spring:message code="page.header.password"></spring:message>" />
+				<button type="submit" class="btn btn-success"><spring:message code="page.header.signin"></spring:message></button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" ><spring:message code="page.header.register"></spring:message></button>				
+			</form>
+		</s:authorize>
 	</div>
 </nav>
 <div id="registerModal" class="modal fade">
@@ -52,5 +65,3 @@
     </div>
   </div>
 </div>
-	
-

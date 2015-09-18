@@ -4,8 +4,12 @@ import javax.validation.Valid;
 
 import com.dta.services.model.AdvertType;
 import com.dta.services.service.IAdvertService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.dta.services.model.Advert;
+
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,6 +48,7 @@ public class HomeController {
 		return "Home";
 	}
 	
+	@Secured("isAnonymous")
 	@RequestMapping(value="register",method=RequestMethod.POST)
 	public String registerUser(@Valid User user,BindingResult bindingResult){
 		
@@ -70,6 +75,7 @@ public class HomeController {
 		return "Advertsview";
 	}
 
+	@Secured("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
 	public String postAdvert(Model model) {
         Advert advert = new Advert();
@@ -80,6 +86,7 @@ public class HomeController {
 		return "PostAdvert";
 	}
 
+	@Secured("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(value = "advert/new", method = RequestMethod.POST)
     public String postAdvert(@Valid Advert advert, Model model, BindingResult bindingResult) {
 
