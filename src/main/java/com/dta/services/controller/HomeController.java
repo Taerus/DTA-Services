@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dta.services.model.Category;
 import com.dta.services.model.Role;
 import com.dta.services.model.User;
 import com.dta.services.service.IUserService;
@@ -44,13 +45,22 @@ public class HomeController {
 		return new User();
 	}
 	
+	@ModelAttribute(value="advert")
+	public Advert advert(){
+		return new Advert();
+	}
+	
 	@RequestMapping
-	public String home(){
+	public String home(Model model){
+		
+		List<Category> categories = advertService.getAllCategory();
+		model.addAttribute("categories", categories);
+		
 		return "Home";
 	}
 	
 	@RequestMapping(value="register",method=RequestMethod.POST)
-	public String registerUser(@Valid User user,BindingResult bindingResult){
+	public String registerUser(@Valid User user,BindingResult bindingResult, Model model){
 		
 		if(bindingResult.hasErrors()){
 			return "Home";
@@ -62,47 +72,52 @@ public class HomeController {
 		
 		userService.createUser(user);
 		
+		model.addAttribute("user",new User());
+		
 		return "Registered";
 	}
 	
-	@RequestMapping(value="users")
-	public String viewUsers(){
+	@RequestMapping(value="users",method=RequestMethod.GET)
+	public String registerUser(Model model){
+		
+		List<Category> categories = advertService.getAllCategory();
+		model.addAttribute("categories", categories);
+		
 		return "Usersview";
 	}
 	
 	@RequestMapping(value="adverts")
-	public String listAdverts(){
+	public String listAdverts(Model model){
+		
+		List<Category> categories = advertService.getAllCategory();
+		model.addAttribute("categories", categories);
+		
 		return "Advertsview";
 	}
 
-	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
-	public String postAdvert(Model model) {
-        Advert advert = new Advert();
-        advert.setPrice(1);
-
-        model.addAttribute("advert", advert);
-
-		return "PostAdvert";
-	}
-
     @RequestMapping(value = "advert/new", method = RequestMethod.POST)
-    public String postAdvert(@Valid Advert advert, BindingResult bindingResult) {
+    public String postAdvert(@Valid Advert advert, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
-			return "PostAdvert";
+			return "Advertsview";
 		}
-
+		
         advert.setType(AdvertType.ADVERT);
         advert.setCreation(new Date());
 		advertService.createAdvert(advert);
+		
+		model.addAttribute("advert", new Advert());
+		model.addAttribute("myAdvert", advert);
 
-        return "redirect:/";
+        return "Advertshow";
     }
     
     @RequestMapping(value="advert/show/{id}", method = RequestMethod.GET)
     public String showAdvert(@PathVariable long id, Model model){
     	
-    	List<Advert> adverts = advertService.list();
+    	Advert advert = advertService.getAdvertById(id);
+    	
+    	model.addAttribute("myAdvert", advert);
     	
     	return "Advertshow";
     }

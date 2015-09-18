@@ -15,7 +15,7 @@
 	</header>
 	<main class="container">
 		<div class="row">
-			${{ advert.id }}
+			${ myAdvert.id }
 		</div>
 	</main>
 	<footer>
