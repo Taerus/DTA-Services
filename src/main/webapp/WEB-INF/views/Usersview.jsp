@@ -23,17 +23,22 @@
 		<table class="table table-striped table-header-clickable">
 			<thead>
 				<tr>
-					<th col-sm-3 ng-click="usersController.setPredicate('login')">																			
-						<spring:message code="page.users.login"></spring:message> 
+					<th ng-click="usersController.setPredicate('login')">																			
+						<spring:message code="page.users.login" />						 
 						<span ng-if="usersController.predicate==='login'" class="glyphicon glyphicon-chevron-down"></span>
 						<span ng-if="usersController.predicate==='-login'" class="glyphicon glyphicon-chevron-up"></span>						
 					</th>
-					<th col-sm-6 ng-click="usersController.setPredicate('email')">
-						<spring:message code="page.users.email"></spring:message>
+					<th ng-click="usersController.setPredicate('email')">
+						<spring:message code="page.users.email" />
 						<span ng-if="usersController.predicate==='email'" class="glyphicon glyphicon-chevron-down"></span>
 						<span ng-if="usersController.predicate==='-email'" class="glyphicon glyphicon-chevron-up"></span>
 					</th>
-					<th col-sm-3>
+					<th ng-click="usersController.setPredicate('country')">
+						<spring:message code="page.users.country" />
+						<span ng-if="usersController.predicate==='country'" class="glyphicon glyphicon-chevron-down"></span>
+						<span ng-if="usersController.predicate==='-country'" class="glyphicon glyphicon-chevron-up"></span>
+					</th>
+					<th>
 					</th>
 				</tr>
 			</thead>
@@ -41,6 +46,7 @@
 				<tr ng-repeat="user in usersController.users | filter:usersController.search | orderBy:usersController.predicate">
 					<td>{{user.login}}</td>
 					<td>{{user.email}}</td>
+					<td>{{user.country}}</td>
 					<td><a href="/DTA-Services/user/{{user.id}}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
 				</tr>
 			</tbody>

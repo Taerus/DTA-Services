@@ -45,6 +45,7 @@
         <property name="jpaPropertyMap">
             <props>
                 <prop key="eclipselink.weaving">static</prop>
+                <prop key="eclipselink.ddl-generation">drop-and-create-tables</prop>
             </props>
         </property>
     </bean>

@@ -15,25 +15,30 @@
 	</header>
 	<main class="container">
 		<div class="row">
-			
-			
 			<div class="col-sm-6">
 				<div class="panel panel-default">
 					<div class="panel-heading"><spring:message code="page.userDetails.title" /></div>
 					<div class="panel-body">
 						
 						<div class="col-sm-6">
-							<p><spring:message code="page.users.login" /> : ${userDetails.login }</p>
-							<p><spring:message code="page.users.email" /> : ${userDetails.email }</p>
+							<h1> ${userDetails.login }</h1>
+							<p>  <a href="mailto:${userDetails.email }">${userDetails.email }</a></p>
+							<p> <strong> ${userDetails.country}, </strong>  ${userDetails.department}</p>
+							<div class="form-inline">
+								<div class="form-group">
+									<a class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope" ></span></a>
+									<a class="btn btn-success btn-sm"><span class="glyphicon glyphicon-usd" ></span></a>
+								</div>
+							</div>							
 						</div>
-						<div class="col-sm-6">
-						
-							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="..." class="img-thumbnail">
-							
+						<div class="col-sm-6">						
+							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="..." class="img-thumbnail">							
 						</div>	
 															
 					</div>
 				</div>
+			</div>
+			<div class="col-sm-6">
 				<div class="panel panel-default">
 					<div class="panel-heading"><spring:message code="page.userDetails.adverts.title" /></div>
 					<ul class="list-group">
@@ -44,8 +49,7 @@
 						<li class="list-group-item">Super</li>
 					</ul>	
 				</div>
-			</div>
-			
+			</div>			
 		</div>
 	</main>
 	<footer>

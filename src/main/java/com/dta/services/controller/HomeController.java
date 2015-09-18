@@ -49,14 +49,17 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="register",method=RequestMethod.POST)
-	public String registerUser(@Valid User user,BindingResult bindingResult){
+	public String registerUser(@Valid User user,BindingResult bindingResult,Model model){
 		
 		if(bindingResult.hasErrors()){
+			model.addAttribute("user", user);
+			model.addAttribute("showModal",true);
 			return "Home";
 		}
 		
 		user.setBalance(0);
 		user.setRole(Role.USER);
+		user.setCreation(new Date());
 		user.setPassword(passwordEncoder.encodePassword(user.getPassword(),null));
 		
 		userService.createUser(user);
