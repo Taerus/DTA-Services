@@ -121,5 +121,13 @@ public class HomeController {
     	
     	return "Advertshow";
     }
+    
+    @RequestMapping(value="advert/delete/{id}", method = RequestMethod.GET)
+    public String deleteAdvert(@PathVariable long id, Model model){
+    	
+    	advertService.deleteAdvert(id);
+    	
+    	return "Advertsview";
+    }
 
 }

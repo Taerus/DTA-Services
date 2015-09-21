@@ -74,9 +74,9 @@
 				    <div class="form-group">
 				    	<label class="control-label col-md-2">Catégorie associée : </label>
 				    	<div class="col-md-10">
-				    		<f:select class="form-control" path="category">
+				    		<f:select class="form-control" path="category.id">
 				    			<c:forEach items="${ categories }" var="ctg">
-				    				<f:option value="${ ctg.id }">${ ctg.name }</f:option>
+				    				<f:option value="${ ctg.id }">${ ctg.name } / ${ ctg.id }</f:option>
 				    			</c:forEach>
 				    		</f:select>
 			        	</div>

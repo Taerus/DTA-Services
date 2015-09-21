@@ -11,5 +11,6 @@ public interface IAdvertService {
 	public void createAdvert(Advert advert);
 	public Advert getAdvertById(long id);
 	public List<Category> getAllCategory();
+	public void deleteAdvert(long id);
 	
 }

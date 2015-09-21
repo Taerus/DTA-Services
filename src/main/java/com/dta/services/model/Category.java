@@ -1,8 +1,14 @@
 package com.dta.services.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 @Entity
 public class Category {
@@ -14,6 +20,9 @@ public class Category {
 	
 	private String name;
 	
+	@OneToMany( mappedBy = "category", cascade = CascadeType.ALL)
+	@CascadeOnDelete
+	private List<Advert> adverts;
 	
 	/*Constructors*/
     public Category() {

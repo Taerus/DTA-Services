@@ -6,13 +6,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.services.dao.IAdvertDao;
 import com.dta.services.dao.ICategoryDao;
 import com.dta.services.model.Advert;
 import com.dta.services.model.Category;
-
-import org.springframework.transaction.annotation.Transactional;
 
 @Service("advertService")
 @Transactional
@@ -46,6 +45,11 @@ public class AdvertServiceImpl implements IAdvertService {
 	@Override
 	public List<Category> getAllCategory() {
 		return categoryDao.list();
+	}
+
+	@Override
+	public void deleteAdvert(long id) {
+		advertDao.delete(id);
 	}
 
 }

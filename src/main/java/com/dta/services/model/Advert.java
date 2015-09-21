@@ -2,9 +2,14 @@ package com.dta.services.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 @Entity
 public class Advert {
@@ -24,6 +29,8 @@ public class Advert {
 	
 	private AdvertType type;
 	
+	@ManyToOne
+	@JoinColumn( name = "category_id")
 	private Category category; 
 	
 	
