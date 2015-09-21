@@ -45,7 +45,11 @@
         <property name="jpaPropertyMap">
             <props>
                 <prop key="eclipselink.weaving">static</prop>
+<<<<<<< HEAD
                 <prop key="eclipselink.ddl-generation">create-tables</prop>
+=======
+                <prop key="eclipselink.ddl-generation">drop-and-create-tables</prop>
+>>>>>>> origin/feature/userDetails
             </props>
         </property>
     </bean>
@@ -53,5 +57,4 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
-
 </beans>

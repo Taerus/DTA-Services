@@ -24,4 +24,9 @@ public class UserServiceImpl implements IUserService {
 		return userDao.list();
 	}
 
+	@Transactional(readOnly=true)
+	public User get(Long id) {
+		return userDao.getById(id);
+	}
+
 }
