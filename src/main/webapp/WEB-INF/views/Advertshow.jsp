@@ -31,6 +31,7 @@
 			</div>
 			
 			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAdvert">Suppression</button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editAdvert">Edition</button>
 			
 			<div id="deleteAdvert" class="modal fade">
 				<div class="modal-dialog">
@@ -42,6 +43,53 @@
 							<div class="modal-footer">
 					        	<button type="submit" class="btn btn-success">Oui</button>
 					        	<button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+							</div>
+						</f:form>
+					</div>
+				</div>
+			</div>
+			
+			<div id="editAdvert" class="modal fade">
+				<div class="modal-dialog">
+			    	<div class="modal-content">
+			    		<div class="modal-header">
+			        		<h1>Edition de l'annonce n°${ myAdvert.id }</h1>
+			      		</div>
+			      		<f:form class="form-horizontal" modelAttribute="myAdvert" method="POST" action="/DTA-Services/advert/new/">
+			      			<div class="modal-body">	
+			      				<f:hidden path="id"/>	        
+					        	<div class="form-group">
+							        <label class="control-label col-md-2"><spring:message code="page.postAdvert.post.title" /></label>
+						        	<div class="col-md-10">
+						        		<f:input class="form-control" path="title" type="text" />
+						        	</div>
+						        </div>
+							    <div class="form-group">
+							    	<label class="control-label col-md-2">Catégorie associée : </label>
+							    	<div class="col-md-10">
+							    		<f:select class="form-control" path="category.id">
+ 							    			<c:forEach items="${ categories }" var="ctg">
+							    				<f:option value="${ ctg.id }">${ ctg.name } / ${ ctg.id }</f:option>
+ 							    			</c:forEach>
+							    		</f:select>
+						        	</div>
+							    </div>
+							    <div class="form-group">
+							        <label for="description" class="control-label col-md-2"><spring:message code="page.postAdvert.post.description" /></label>
+							        <div class="col-md-10">
+							        	<f:textarea class="form-control" path="description" rows="8" />
+							        </div>
+							    </div>    
+							    <div class="form-group">
+							        <label for="price" class="control-label col-md-2"><spring:message code="page.postAdvert.post.price" /></label>
+							        <div class="col-md-10">
+							        	<f:input class="form-control" path="price" type="number" />
+							        </div>
+							    </div>    					       
+						    </div>
+							<div class="modal-footer">
+					        	<button type="submit" class="btn btn-success">Editer</button>
+					        	<button type="button" class="btn btn-warning" data-dismiss="modal">Annuler</button>
 							</div>
 						</f:form>
 					</div>

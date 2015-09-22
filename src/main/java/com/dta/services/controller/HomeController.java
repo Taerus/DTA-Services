@@ -53,9 +53,6 @@ public class HomeController {
 	@RequestMapping
 	public String home(Model model){
 		
-		List<Category> categories = advertService.getAllCategory();
-		model.addAttribute("categories", categories);
-		
 		return "Home";
 	}
 	
@@ -80,21 +77,26 @@ public class HomeController {
 	@RequestMapping(value="users",method=RequestMethod.GET)
 	public String registerUser(Model model){
 		
-		List<Category> categories = advertService.getAllCategory();
-		model.addAttribute("categories", categories);
-		
 		return "Usersview";
 	}
 	
 	@RequestMapping(value="adverts")
 	public String listAdverts(Model model){
 		
-		List<Category> categories = advertService.getAllCategory();
-		model.addAttribute("categories", categories);
-		
 		return "Advertsview";
 	}
 
+	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
+	public String postAdvert(Model model){
+		
+		List<Category> categories = advertService.getAllCategory();
+		model.addAttribute("categories", categories);
+		
+		model.addAttribute("advert", new Advert());
+		
+		return "PostAdvert";
+	}
+	
     @RequestMapping(value = "advert/new", method = RequestMethod.POST)
     public String postAdvert(@Valid Advert advert, BindingResult bindingResult, Model model) {
 
@@ -102,11 +104,17 @@ public class HomeController {
 			return "Advertsview";
 		}
 		
-        advert.setType(AdvertType.ADVERT);
-        advert.setCreation(new Date());
-		advertService.createAdvert(advert);
-		
-		model.addAttribute("advert", new Advert());
+		Advert advertCurrent = advertService.getAdvertById(advert.getId());
+		if (advertCurrent != null){
+			advert.setCreation(new Date());
+			advertService.editAdvert(advert);
+		}
+		else {
+			advert.setType(AdvertType.ADVERT);
+	        advert.setCreation(new Date());
+			advertService.createAdvert(advert);
+		}
+        
 		model.addAttribute("myAdvert", advert);
 
         return "Advertshow";
@@ -115,8 +123,10 @@ public class HomeController {
     @RequestMapping(value="advert/show/{id}", method = RequestMethod.GET)
     public String showAdvert(@PathVariable long id, Model model){
     	
-    	Advert advert = advertService.getAdvertById(id);
+    	List<Category> categories = advertService.getAllCategory();
+    	model.addAttribute("categories", categories);
     	
+    	Advert advert = advertService.getAdvertById(id);
     	model.addAttribute("myAdvert", advert);
     	
     	return "Advertshow";

@@ -52,4 +52,10 @@ public class AdvertServiceImpl implements IAdvertService {
 		advertDao.delete(id);
 	}
 
+	@Override
+	public void editAdvert(Advert advert) {
+
+		advertDao.update(advert);
+	}
+
 }
