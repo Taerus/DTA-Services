@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header>
-		<c:import url="_HEADER_.jsp"></c:import>
+		<c:import url="_HEADER_.jsp" />
 	</header>
 	<main class="container">
 		<div class="row">
