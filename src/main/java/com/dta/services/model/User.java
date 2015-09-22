@@ -1,17 +1,23 @@
 package com.dta.services.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 
 @Entity
@@ -47,6 +53,9 @@ public class User {
 	
 	@NotNull
 	private String country;
+	
+	@OneToMany(mappedBy="author",cascade=CascadeType.PERSIST)
+	private List<Advert> adverts;
 	
 	/*Constructors*/
     public User() {
@@ -143,6 +152,16 @@ public class User {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+	@JsonIgnore
+	public List<Advert> getAdverts() {
+		return adverts;
+	}
+
+	public void setAdverts(List<Advert> adverts) {
+		this.adverts = adverts;
+	}
+	
 	
 	
 

@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 public class Advert {
 
@@ -27,6 +29,9 @@ public class Advert {
 	@JoinColumn(name = "category_id")
 	private Category category; 
 	
+	@ManyToOne
+	@JoinColumn(name="author_id")
+	private User author;
 	
 	/*Constructors*/
     public Advert() {
@@ -100,5 +105,14 @@ public class Advert {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+	
 	
 }
