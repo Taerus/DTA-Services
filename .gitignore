@@ -113,5 +113,6 @@ hs_err_pid*
 
 /dta-services.log
 
-
+# Excluding DiffMerge files
+*.orig
 
