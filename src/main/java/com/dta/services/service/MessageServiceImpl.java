@@ -28,12 +28,12 @@ public class MessageServiceImpl implements IMessageService {
 
     @Override
     public void postMessage(Message message) {
-        messageDao.create(message);
+        messageDao.createMessage(message);
     }
 
     @Override
     public void deleteMessage(long id) {
-        messageDao.delete(id);
+        messageDao.deleteMessage(id);
     }
 
 
@@ -48,7 +48,7 @@ public class MessageServiceImpl implements IMessageService {
     @Override
     @Transactional(readOnly = true)
     public List<PrivateMessage> listSentPrivateMessages(long senderId) {
-        return null;
+        return messageDao.getPrivateMessagesByAuthor(senderId);
     }
 
     @Override

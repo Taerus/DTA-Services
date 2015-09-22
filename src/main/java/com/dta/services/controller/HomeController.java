@@ -10,15 +10,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dta.services.service.IUserService;
 import com.dta.services.utils.PasswordEncoder;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -120,12 +119,39 @@ public class HomeController {
         return "Home";
     }
 
+    @RequestMapping(value = "user/messages/received", method = RequestMethod.GET)
+    public String getUserMessages(Model model) {
+
+        User user = getLoggedUser();
+        if (user != null) {
+            user.getId();
+        }
+
+		model.addAttribute("box", "inbox");
+
+        return "ListPrivateMessages";
+    }
+
+	@RequestMapping(value = "user/messages/sent", method = RequestMethod.GET)
+	public String getSentUserMessages(Model model) {
+
+	User user = getLoggedUser();
+		if (user != null) {
+			user.getId();
+		}
+
+		model.addAttribute("box", "sentbox");
+
+		return "ListPrivateMessages";
+	}
+
     private User getLoggedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         Object user = (auth != null) ? auth.getPrincipal() :  null;
 
-        return (user instanceof User) ? (User)user : null;
+        //return (user instanceof User) ? (User)user : null;
+        return userService.getAll().get(0);
     }
 
 }
