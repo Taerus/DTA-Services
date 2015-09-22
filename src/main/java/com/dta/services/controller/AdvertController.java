@@ -20,17 +20,17 @@ import com.dta.services.model.AdvertType;
 import com.dta.services.model.Category;
 import com.dta.services.model.User;
 import com.dta.services.service.IAdvertService;
+import com.dta.services.service.IUserService;
 
 @Controller
 @RequestMapping("/")
 public class AdvertController {
+	
 	@Autowired
 	IAdvertService advertService;
 	
-	
-	/*
-	 * Trucs chiants
-	 */
+	@Autowired
+	IUserService userService;
 	
 	@ModelAttribute(value="user")
 	public User user(){
@@ -55,12 +55,16 @@ public class AdvertController {
 	}
 
 	@Secured("hasAnyRole('USER', 'ADMIN')")
-	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
-	public String postAdvert(Model model) {
+	@RequestMapping(value = "advert/new/{id}", method = RequestMethod.GET)
+	public String postAdvert(@PathVariable long id, Model model) {
 
 		List<Category> categories = advertService.getAllCategory();
 		model.addAttribute("categories", categories);
 
+		User user = userService.get(id);
+		
+		model.addAttribute("myUser", user);
+		
 		model.addAttribute("advert", new Advert());
 
 		return "PostAdvert";
@@ -68,8 +72,7 @@ public class AdvertController {
 
 	@Secured("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "advert/new", method = RequestMethod.POST)
-	public String postAdvert(@Valid Advert advert, BindingResult bindingResult,
-			Model model) {
+	public String postAdvert(@Valid Advert advert, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			return "Advertsview";
@@ -83,6 +86,7 @@ public class AdvertController {
 		} else {
 			advert.setType(AdvertType.ADVERT);
 			advert.setCreation(new Date());
+
 			advertService.createAdvert(advert);
 		}
 
