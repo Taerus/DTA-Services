@@ -2,9 +2,11 @@ package com.dta.services.test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 
 import com.dta.services.model.Role;
@@ -28,7 +30,7 @@ public class TestUserService {
 		
 		userService.createUser(user);
 		
-		assertEquals(userService.getAll().size(),1);
+		Assert.assertTrue( user.getId()>0 );
 		
 	}
 }

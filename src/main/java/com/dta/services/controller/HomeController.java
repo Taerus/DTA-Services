@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dta.services.model.Category;
 import com.dta.services.model.Role;
 import com.dta.services.model.User;
 import com.dta.services.service.IUserService;
 import com.dta.services.utils.PasswordEncoder;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -44,14 +46,20 @@ public class HomeController {
 		return new User();
 	}
 	
+	@ModelAttribute(value="advert")
+	public Advert advert(){
+		return new Advert();
+	}
+	
 	@RequestMapping
-	public String home(){
+	public String home(Model model){
+		
 		return "Home";
 	}
 	
 	@Secured("isAnonymous")
 	@RequestMapping(value="register",method=RequestMethod.POST)
-	public String registerUser(@Valid User user,BindingResult bindingResult,Model model){
+	public String registerUser(@Valid User user,BindingResult bindingResult, Model model){
 		
 		if(bindingResult.hasErrors()){
 			model.addAttribute("user", user);
@@ -66,50 +74,77 @@ public class HomeController {
 		
 		userService.createUser(user);
 		
+		model.addAttribute("user",new User());
+		
 		return "Registered";
 	}
 	
 	@RequestMapping(value="users",method=RequestMethod.GET)
-	public String viewUsers(){
+	public String registerUser(Model model){
+		
 		return "Usersview";
 	}
 	
 	@RequestMapping(value="adverts")
-	public String listAdverts(){
+	public String listAdverts(Model model){
+		
 		return "Advertsview";
 	}
 
 	@Secured("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
-	public String postAdvert(Model model) {
-        Advert advert = new Advert();
-        advert.setPrice(1);
-
-        model.addAttribute("advert", advert);
-
+	public String postAdvert(Model model){
+		
+		List<Category> categories = advertService.getAllCategory();
+		model.addAttribute("categories", categories);
+		
+		model.addAttribute("advert", new Advert());
+		
 		return "PostAdvert";
 	}
 
 	@Secured("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(value = "advert/new", method = RequestMethod.POST)
-    public String postAdvert(@Valid Advert advert, Model model, BindingResult bindingResult) {
+    public String postAdvert(@Valid Advert advert, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
-			return "PostAdvert";
+			return "Advertsview";
 		}
+		
+		Advert advertCurrent = advertService.getAdvertById(advert.getId());
+		if (advertCurrent != null){
+			advert.setCreation(new Date());
+			advertService.editAdvert(advert);
+		}
+		else {
+			advert.setType(AdvertType.ADVERT);
+	        advert.setCreation(new Date());
+			advertService.createAdvert(advert);
+		}
+        
+		model.addAttribute("myAdvert", advert);
 
-        advert.setType(AdvertType.ADVERT);
-        advert.setCreation(new Date());
-		advertService.createAdvert(advert);
-
-        return "redirect:/";
+        return "Advertshow";
     }
     
-    @RequestMapping(value="user/{id}",method=RequestMethod.GET)
-    public String userDetails(@PathVariable("id") Long id,Model model){
-    	model.addAttribute("userDetails",userService.get(id));
+    @RequestMapping(value="advert/show/{id}", method = RequestMethod.GET)
+    public String showAdvert(@PathVariable long id, Model model){
     	
-    	return "Userdetails";
+    	List<Category> categories = advertService.getAllCategory();
+    	model.addAttribute("categories", categories);
+    	
+    	Advert advert = advertService.getAdvertById(id);
+    	model.addAttribute("myAdvert", advert);
+    	
+    	return "Advertshow";
+    }
+    
+    @RequestMapping(value="advert/delete/{id}", method = RequestMethod.GET)
+    public String deleteAdvert(@PathVariable long id, Model model){
+    	
+    	advertService.deleteAdvert(id);
+    	
+    	return "Advertsview";
     }
 
 }

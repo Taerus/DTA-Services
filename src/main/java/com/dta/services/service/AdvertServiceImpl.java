@@ -6,18 +6,24 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dta.services.dao.IAdvertDao;
+import com.dta.services.dao.ICategoryDao;
 import com.dta.services.model.Advert;
-import org.springframework.transaction.annotation.Transactional;
+import com.dta.services.model.Category;
 
 @Service("advertService")
 @Transactional
 public class AdvertServiceImpl implements IAdvertService {
+	
 	private final static Logger logger = LogManager.getLogger();
 
 	@Autowired
 	private IAdvertDao advertDao;
+	
+	@Autowired
+	private ICategoryDao categoryDao;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -29,6 +35,27 @@ public class AdvertServiceImpl implements IAdvertService {
 	public void createAdvert(Advert advert) {
 		advertDao.create(advert);
 		logger.debug("advert created : {}", advert);
+	}
+
+	@Override
+	public Advert getAdvertById(long id) {
+		return advertDao.getById(id);
+	}
+
+	@Override
+	public List<Category> getAllCategory() {
+		return categoryDao.list();
+	}
+
+	@Override
+	public void deleteAdvert(long id) {
+		advertDao.delete(id);
+	}
+
+	@Override
+	public void editAdvert(Advert advert) {
+
+		advertDao.update(advert);
 	}
 
 }

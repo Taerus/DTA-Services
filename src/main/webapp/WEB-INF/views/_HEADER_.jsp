@@ -14,28 +14,33 @@
 		</ul>
 		
 		<s:authorize access="hasRole('USER')">
+			<a href="/DTA-Services/advert/new/" class="btn btn-warning" role="button"><spring:message code="page.header.postAdvert" /></a>
 			<ul class="nav navbar-nav navbar-right">
 			
 				<li><a href="/DTA-Services/j_spring_security_logout"><spring:message code="page.header.logout" /> </a></li>
 			</ul>
 			<p class="navbar-text navbar-right"><spring:message code="page.header.signedin" /> <a href="#" class="navbar-link"><s:authentication property="principal.username" /></a></p>
+			
 		</s:authorize>
+		
+		
 		
 		<s:authorize access="isAnonymous()">
 			<form class="navbar-form navbar-right" action="<c:out value='/DTA-Services/j_spring_security_check'/>" method="POST">
-				<input class="form-control" name="j_username" type="text" placeholder="<spring:message code="page.header.login"></spring:message>"/>
-				<input class="form-control" name="j_password" type="password" placeholder="<spring:message code="page.header.password"></spring:message>" />
-				<button type="submit" class="btn btn-success"><spring:message code="page.header.signin"></spring:message></button>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" ><spring:message code="page.header.register"></spring:message></button>				
+			<input class="form-control" type="text" placeholder="<spring:message code="page.header.login"></spring:message>"/>
+			<input class="form-control" type="password" placeholder="<spring:message code="page.header.password"></spring:message>" />
+			<button type="submit" class="btn btn-success"><spring:message code="page.header.signin" /></button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" ><spring:message code="page.header.register" /></button>								
 			</form>
 		</s:authorize>
 	</div>
 </nav>
+
 <div id="registerModal" class="modal fade">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1><spring:message code="page.header.modal.register.title"></spring:message></h1>
+        <h1><spring:message code="page.header.modal.register.title" /></h1>
       </div>
       <f:form class="form-horizontal" modelAttribute="user" method="POST" action="/DTA-Services/register">
 	      <div class="modal-body">		        
@@ -82,7 +87,7 @@
         	</div>	       				       
 	      </div>
 	      <div class="modal-footer">
-	        	<button type="submit" class="btn btn-success"><spring:message code="page.header.modal.register.submit"></spring:message></button>
+	        	<button type="submit" class="btn btn-success"><spring:message code="page.header.modal.register.submit" /></button>
 	      </div>
       </f:form>
     </div>
