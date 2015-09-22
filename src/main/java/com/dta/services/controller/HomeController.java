@@ -45,18 +45,7 @@ public class HomeController {
 	public User user(){
 		return new User();
 	}
-	
-	@ModelAttribute(value="advert")
-	public Advert advert(){
-		return new Advert();
-	}
-	
-	@RequestMapping
-	public String home(Model model){
-		
-		return "Home";
-	}
-	
+
 	@Secured("isAnonymous")
 	@RequestMapping(value="register",method=RequestMethod.POST)
 	public String registerUser(@Valid User user,BindingResult bindingResult, Model model){
@@ -79,72 +68,16 @@ public class HomeController {
 		return "Registered";
 	}
 	
-	@RequestMapping(value="users",method=RequestMethod.GET)
-	public String registerUser(Model model){
-		
+	@RequestMapping(value = "users", method = RequestMethod.GET)
+	public String viewUsers() {
 		return "Usersview";
 	}
+
 	
-	@RequestMapping(value="adverts")
-	public String listAdverts(Model model){
-		
-		return "Advertsview";
-	}
-
-	@Secured("hasAnyRole('USER', 'ADMIN')")
-	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
-	public String postAdvert(Model model){
-		
-		List<Category> categories = advertService.getAllCategory();
-		model.addAttribute("categories", categories);
-		
-		model.addAttribute("advert", new Advert());
-		
-		return "PostAdvert";
-	}
-
-	@Secured("hasAnyRole('USER', 'ADMIN')")
-    @RequestMapping(value = "advert/new", method = RequestMethod.POST)
-    public String postAdvert(@Valid Advert advert, BindingResult bindingResult, Model model) {
-
-		if (bindingResult.hasErrors()) {
-			return "Advertsview";
-		}
-		
-		Advert advertCurrent = advertService.getAdvertById(advert.getId());
-		if (advertCurrent != null){
-			advert.setCreation(new Date());
-			advertService.editAdvert(advert);
-		}
-		else {
-			advert.setType(AdvertType.ADVERT);
-	        advert.setCreation(new Date());
-			advertService.createAdvert(advert);
-		}
-        
-		model.addAttribute("myAdvert", advert);
-
-        return "Advertshow";
+    @RequestMapping(value="user/{id}",method=RequestMethod.GET)
+    public String userDetails(@PathVariable("id") Long id,Model model){
+    	model.addAttribute("userDetails",userService.get(id));
+    	
+    	return "Userdetails";
     }
-    
-    @RequestMapping(value="advert/show/{id}", method = RequestMethod.GET)
-    public String showAdvert(@PathVariable long id, Model model){
-    	
-    	List<Category> categories = advertService.getAllCategory();
-    	model.addAttribute("categories", categories);
-    	
-    	Advert advert = advertService.getAdvertById(id);
-    	model.addAttribute("myAdvert", advert);
-    	
-    	return "Advertshow";
-    }
-    
-    @RequestMapping(value="advert/delete/{id}", method = RequestMethod.GET)
-    public String deleteAdvert(@PathVariable long id, Model model){
-    	
-    	advertService.deleteAdvert(id);
-    	
-    	return "Advertsview";
-    }
-
 }
