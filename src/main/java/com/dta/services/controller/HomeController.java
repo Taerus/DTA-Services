@@ -119,7 +119,7 @@ public class HomeController {
         return "Home";
     }
 
-    @RequestMapping(value = "user/messages/received", method = RequestMethod.GET)
+    @RequestMapping(value = "user/messages", method = RequestMethod.GET)
     public String getUserMessages(Model model) {
 
         User user = getLoggedUser();
@@ -127,23 +127,8 @@ public class HomeController {
             user.getId();
         }
 
-		model.addAttribute("box", "inbox");
-
         return "ListPrivateMessages";
     }
-
-	@RequestMapping(value = "user/messages/sent", method = RequestMethod.GET)
-	public String getSentUserMessages(Model model) {
-
-	User user = getLoggedUser();
-		if (user != null) {
-			user.getId();
-		}
-
-		model.addAttribute("box", "sentbox");
-
-		return "ListPrivateMessages";
-	}
 
     private User getLoggedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

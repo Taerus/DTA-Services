@@ -5,39 +5,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title><spring:message code="page.listPrivateMessage.title" /></title>
-  <c:import url="_STYLESHEETS_.jsp" />
-  <c:import url="_SCRIPT_.jsp" />
-  <script src="/DTA-Services/js/services/message-service.js"></script>
-  <script src="/DTA-Services/js/controller/message-controller.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><spring:message code="page.listPrivateMessage.title"/></title>
+    <c:import url="_STYLESHEETS_.jsp"/>
+    <c:import url="_SCRIPT_.jsp"/>
+    <script src="/DTA-Services/js/service/message-service.js"></script>
+    <script src="/DTA-Services/js/filter/message-filter.js"></script>
+    <script src="/DTA-Services/js/controller/message-controller.js"></script>
 </head>
 <body ng-app="dta-services">
 
 <header>
-  <c:import url="_HEADER_.jsp" />
-  <div class="container">
-    <h1><spring:message code="page.listPrivateMessage.title" /></h1>
-  </div>
+    <c:import url="_HEADER_.jsp"/>
+    <div class="container">
+        <h1><spring:message code="page.listPrivateMessage.title"/></h1>
+    </div>
 </header>
 
 <main class="container">
-  <div ng-controller="MessageListController as ctrl" class="row">
-    <div class="well col-md-6">
-      <ul>
-        <li ng-repeat="message in ctrl.messages track by $index">
-          <span class="btn-link" ng-click="ctrl.select($index)"> {{ message.title }}</span>
-        </li>
-      </ul>
+    <div ng-controller="MessageListController as ctrl" class="row">
+        <div class="col-md-6">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#received" aria-controls="received" role="tab" data-toggle="tab" ng-click="ctrl.select(0, 'r')">
+                        Messages reçus
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#sent" aria-controls="sent" role="tab" data-toggle="tab" ng-click="ctrl.select(0, 's')">
+                        Messages envoyés
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="received">
+                    <div class="list-group">
+                        <a class="list-group-item" href="#" class="btn-link"
+                           ng-class="{'active':message.id == ctrl.selected.id}"
+                           ng-click="ctrl.select($index)"
+                           ng-repeat="message in ctrl.received track by $index">
+                            {{ message.title }} <span class="pull-right">{{ message.creationDate | msgDate }}</span>
+                        </a>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="sent">
+                    <div class="list-group">
+                        <a class="list-group-item" href="#" class="btn-link"
+                            ng-class="{'active':message.id == ctrl.selected.id}"
+                            ng-click="ctrl.select($index)"
+                            ng-repeat="message in ctrl.sent track by $index">
+                            {{ message.title }} <span class="pull-right">{{ message.creationDate | msgDate }}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default" ng-if="ctrl.selected.id">
+                <div class="panel-heading">{{ ctrl.selected.title }} <span class="pull-right">{{ ctrl.selected.creationDate | msgDate }}</span></div>
+                <div class="panel-body">
+                    <p>{{ ctrl.selected.content }}</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="well col-md-6">
-      <p>{{ ctrl.selected.content }}</p>
-    </div>
-  </div>
 </main>
 
 <footer>
-  <c:import url="_FOOTER_.jsp" />
+    <c:import url="_FOOTER_.jsp"/>
 </footer>
 
 </body>

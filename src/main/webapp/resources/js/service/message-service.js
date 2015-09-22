@@ -8,6 +8,10 @@ function MessageService($http) {
 
     var service = {};
 
+    service.getReceivedMessages = function(userId) {
+        return $http.get(API + "/user/" + userId + "/message/received");
+    };
+
     service.getSentMessages = function(userId) {
         return $http.get(API + "/user/" + userId + "/message/sent");
     };
