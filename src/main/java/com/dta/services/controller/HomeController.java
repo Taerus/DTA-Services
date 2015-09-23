@@ -4,10 +4,7 @@ import javax.validation.Valid;
 
 import com.dta.services.model.*;
 import com.dta.services.service.IAdvertService;
-import com.dta.services.service.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +14,6 @@ import com.dta.services.service.IUserService;
 import com.dta.services.utils.PasswordEncoder;
 
 import java.util.Date;
-import java.util.List;
 
 
 @Controller
@@ -29,9 +25,6 @@ public class HomeController {
 
 	@Autowired
 	private IAdvertService advertService;
-
-	@Autowired
-	private IMessageService messageService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -94,49 +87,6 @@ public class HomeController {
 		advertService.createAdvert(advert);
 
         return "redirect:/";
-    }
-
-	@RequestMapping(value = "message/new", method = RequestMethod.GET)
-	public String writeMessage(Model model) {
-        PrivateMessage message = new PrivateMessage();
-
-        model.addAttribute("message", message);
-
-		return "NewPrivateMessage";
-	}
-
-    @RequestMapping(value = "message/send", method = RequestMethod.POST)
-    public String sendMessage(@Valid PrivateMessage message, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            return "NewPrivateMessage";
-        }
-
-        message.setAuthor(getLoggedUser());
-        message.setCreationDate(new Date());
-        messageService.postMessage(message);
-
-        return "Home";
-    }
-
-    @RequestMapping(value = "user/messages", method = RequestMethod.GET)
-    public String getUserMessages(Model model) {
-
-        User user = getLoggedUser();
-        if (user != null) {
-            user.getId();
-        }
-
-        return "ListPrivateMessages";
-    }
-
-    private User getLoggedUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        Object user = (auth != null) ? auth.getPrincipal() :  null;
-
-        //return (user instanceof User) ? (User)user : null;
-        return userService.getAll().get(0);
     }
 
 }
