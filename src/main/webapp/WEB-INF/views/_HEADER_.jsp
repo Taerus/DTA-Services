@@ -26,9 +26,9 @@
 		
 		
 		<s:authorize access="isAnonymous()">
-			<form class="navbar-form navbar-right" action="<c:out value='/DTA-Services/j_spring_security_check'/>" method="POST">
-			<input class="form-control" type="text" placeholder="<spring:message code="page.header.login"></spring:message>"/>
-			<input class="form-control" type="password" placeholder="<spring:message code="page.header.password"></spring:message>" />
+			<form class="navbar-form navbar-right" action="/DTA-Services/j_spring_security_check" method="POST">
+			<input class="form-control" name="j_username" type="text" placeholder="<spring:message code="page.header.login"></spring:message>"/>
+			<input class="form-control" name="j_password" type="password" placeholder="<spring:message code="page.header.password"></spring:message>" />
 			<button type="submit" class="btn btn-success"><spring:message code="page.header.signin" /></button>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" ><spring:message code="page.header.register" /></button>								
 			</form>
