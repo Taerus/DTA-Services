@@ -8,4 +8,5 @@ public interface IUserService {
 	public void createUser(User user);
 	public List<User> getAll();
 	public User get(Long id);
+	public User getByLogin(String login);
 }
