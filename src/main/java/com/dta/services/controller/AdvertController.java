@@ -1,5 +1,6 @@
 package com.dta.services.controller;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -55,15 +56,11 @@ public class AdvertController {
 	}
 
 	@Secured("hasAnyRole('USER', 'ADMIN')")
-	@RequestMapping(value = "advert/new/{id}", method = RequestMethod.GET)
-	public String postAdvert(@PathVariable long id, Model model) {
+	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
+	public String postAdvert(Model model) {
 
 		List<Category> categories = advertService.getAllCategory();
 		model.addAttribute("categories", categories);
-
-		User user = userService.get(id);
-		
-		model.addAttribute("myUser", user);
 		
 		model.addAttribute("advert", new Advert());
 
@@ -72,11 +69,14 @@ public class AdvertController {
 
 	@Secured("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "advert/new", method = RequestMethod.POST)
-	public String postAdvert(@Valid Advert advert, BindingResult bindingResult, Model model) {
+	public String postAdvert(@Valid Advert advert, BindingResult bindingResult, Model model, Principal principal) {
 
 		if (bindingResult.hasErrors()) {
 			return "Advertsview";
 		}
+		
+		principal.getName();
+		
 
 		Advert advertCurrent = advertService.getAdvertById(advert.getId());
 		if (advertCurrent != null) {
