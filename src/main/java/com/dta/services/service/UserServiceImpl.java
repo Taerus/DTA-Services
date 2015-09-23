@@ -29,4 +29,9 @@ public class UserServiceImpl implements IUserService {
 		return userDao.getById(id);
 	}
 
+	@Transactional(readOnly=true)
+	public User getByLogin(String login) {
+		return userDao.getByLogin(login);
+	}
+
 }
