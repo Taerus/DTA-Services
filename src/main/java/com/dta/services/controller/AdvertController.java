@@ -72,21 +72,21 @@ public class AdvertController {
 
 	
 	/*Root to show the form add of adverts*/
-	@PreAuthorize("IS_AUTHENTICATED")
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
-	public String postAdvert(Model model) {
+	public String postAdvert(Model model, Principal principal) {
 
 		List<Category> categories = advertService.getAllCategory();
 		model.addAttribute("categories", categories);
 		
 		model.addAttribute("advert", new Advert());
-
+			
 		return "PostAdvert";
 	}
 
 	
 	/*Root to adding/updating adverts*/
-	@PreAuthorize("IS_AUTHENTICATED")
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "advert/new", method = RequestMethod.POST)
 	public String postAdvert(@Valid Advert advert, BindingResult bindingResult, Model model, Principal principal) {
 
@@ -145,7 +145,7 @@ public class AdvertController {
 
 	
 	/*Root to show the complete details of an advert*/
-	@PreAuthorize("IS_AUTHENTICATED")
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "advert/show/{id}", method = RequestMethod.GET)
 	public String showAdvert(@PathVariable long id, Model model,Principal principal) {
 		
@@ -172,7 +172,7 @@ public class AdvertController {
 
 	
 	/*Root to delete an advert*/
-	@PreAuthorize("IS_AUTHENTICATED")
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "advert/delete/{id}", method = RequestMethod.GET)
 	public String deleteAdvert(@PathVariable long id, Model model, Principal principal) {
 
