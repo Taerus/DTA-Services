@@ -15,6 +15,7 @@ public interface IMessageDao {
 
 	PrivateMessage getPrivateMessageById(long id);
 	List<PrivateMessage> getPrivateMessagesByAuthor(long authorId);
+	List<PrivateMessage> getPrivateMessagesByTarget(long targetId);
 	List<PrivateMessage> listPrivateMessages();
 	
 }

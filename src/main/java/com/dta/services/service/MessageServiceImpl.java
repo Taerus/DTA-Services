@@ -54,7 +54,7 @@ public class MessageServiceImpl implements IMessageService {
     @Override
     @Transactional(readOnly = true)
     public List<PrivateMessage> listReceivedPrivateMessages(long receiverId) {
-        return null;
+        return messageDao.getPrivateMessagesByTarget(receiverId);
     }
 
 

@@ -65,6 +65,21 @@ public class MessageDaoImpl implements IMessageDao {
 	}
 
 	@Override
+	public List<PrivateMessage> getPrivateMessagesByTarget(long targetId) {
+		TypedQuery<PrivateMessage> query = em.createQuery(
+				"SELECT msg " +
+						"FROM PrivateMessage msg " +
+						"JOIN msg.targets to " +
+						"WHERE to.id = :target_id",
+				PrivateMessage.class
+		);
+
+		query.setParameter("target_id", targetId);
+
+		return query.getResultList();
+	}
+
+	@Override
 	public List<PrivateMessage> listPrivateMessages() {
 		TypedQuery<PrivateMessage> query = em.createQuery(
 				"SELECT msg FROM PrivateMessage msg",

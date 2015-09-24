@@ -5,14 +5,16 @@ function MessageListController(MessageService) {
     "use strict";
     var _this = this;
 
-    MessageService.getReceivedMessages(51).then(function(result) {
-        _this.received = sortMessage(result.data);
-        _this.select(0, 'r');
-    });
+    _this.load = function(userId) {
+        MessageService.getReceivedMessages(userId).then(function(result) {
+            _this.received = sortMessage(result.data);
+            _this.select(0, 'r');
+        });
 
-    MessageService.getSentMessages(51).then(function(result) {
-        _this.sent = sortMessage(result.data);
-    });
+        MessageService.getSentMessages(userId).then(function(result) {
+            _this.sent = sortMessage(result.data);
+        });
+    };
 
     _this.select = function(idx, tab) {
         if(tab == 'r') {

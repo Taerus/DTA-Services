@@ -6,7 +6,7 @@ import java.util.Date;
 @Entity
 public class AdvertMessage extends Message {
 
-    private String title;
+    private Advert advert;
 
     public AdvertMessage() {
     }
@@ -14,19 +14,20 @@ public class AdvertMessage extends Message {
 
     // --------- constructors ----------
 
-    public AdvertMessage(Date creationDate, String content, User author, String title) {
+    public AdvertMessage(Date creationDate, String content, User author, Advert advert) {
         super(creationDate, content, author);
-        this.title = title;
+        this.advert = advert;
     }
 
 
     // -------- getter / setter --------
 
-    public String getTitle() {
-        return title;
+    public Advert getAdvert() {
+        return advert;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setAdvert(Advert advert) {
+        this.advert = advert;
     }
+
 }

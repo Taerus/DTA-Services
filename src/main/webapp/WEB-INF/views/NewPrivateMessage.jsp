@@ -22,9 +22,12 @@
 <main class="container">
 	<div class="well col-md-offset-2 col-md-8">
 		<f:form action="/DTA-Services/message/send" method="post" cssClass="form-horizontal" modelAttribute="message">
+            <c:forEach items="${message.targets}" varStatus="vs">
+                <f:hidden path="targets[${vs.index}]" />
+            </c:forEach>
             <div class="form-group">
-                <label for="title" class="control-label col-md-2"><spring:message code="page.sendPrivateMessage.form.title" /></label>
-                <div class="col-md-10"><f:input path="title" id="title" cssClass="form-control" /></div>
+                <label for="subject" class="control-label col-md-2"><spring:message code="page.sendPrivateMessage.form.subject" /></label>
+                <div class="col-md-10"><f:input path="subject" id="subject" cssClass="form-control" /></div>
             </div>
             <div class="form-group">
                 <label for="content" class="control-label col-md-2"><spring:message code="page.sendPrivateMessage.form.content" /></label>

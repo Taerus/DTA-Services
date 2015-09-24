@@ -23,7 +23,7 @@
 </header>
 
 <main class="container">
-    <div ng-controller="MessageListController as ctrl" class="row">
+    <div ng-controller="MessageListController as ctrl" ng-init="ctrl.load(${userId})" class="row">
         <div class="col-md-6">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -45,17 +45,27 @@
                            ng-class="{'active':message.id == ctrl.selected.id}"
                            ng-click="ctrl.select($index)"
                            ng-repeat="message in ctrl.received track by $index">
-                            {{ message.title }} <span class="pull-right">{{ message.creationDate | msgDate }}</span>
+                            <span style="display: inline-block; width: 8em">
+                                {{ message.author.login }}</span>
+                            <span style="border-left:1px solid gray; padding-left:1em;">
+                                {{ message.title }}</span>
+                            <span class="pull-right">
+                                {{ message.creationDate | msgDate }}</span>
                         </a>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="sent">
-                    <div class="list-group">
+                    <div class="list-group"">
                         <a class="list-group-item" href="#" class="btn-link"
                             ng-class="{'active':message.id == ctrl.selected.id}"
                             ng-click="ctrl.select($index)"
                             ng-repeat="message in ctrl.sent track by $index">
-                            {{ message.title }} <span class="pull-right">{{ message.creationDate | msgDate }}</span>
+                            <span style="display: inline-block; width: 8em">
+                                {{ message.targets[0].login }}</span>
+                            <span style="border-left:1px solid gray; padding-left:1em;">
+                                {{ message.title }}</span>
+                            <span class="pull-right">
+                                {{ message.creationDate | msgDate }}</span>
                         </a>
                     </div>
                 </div>
