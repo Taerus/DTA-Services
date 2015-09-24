@@ -57,6 +57,8 @@ public class User {
 	@OneToMany(mappedBy="author",cascade=CascadeType.PERSIST)
 	private List<Advert> adverts;
 	
+	private boolean enabled;
+	
 	/*Constructors*/
     public User() {
     }
@@ -161,6 +163,15 @@ public class User {
 	public void setAdverts(List<Advert> adverts) {
 		this.adverts = adverts;
 	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
 	
 	
 	

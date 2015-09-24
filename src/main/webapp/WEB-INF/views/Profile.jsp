@@ -47,11 +47,14 @@
 						</c:if>
 										
 					</div>
-					<ul class="list-group">
-						<li class="list-group-item">
-							<a href="/DTA-Services/profile/edit"><span class="glyphicon glyphicon-pencil"></span> <spring:message code="page.profile.edit" /></a>
-						</li>						
-					</ul>
+					<div class="list-group">
+						<a class="list-group-item" href="/DTA-Services/profile/edit">
+							<span class="glyphicon glyphicon-pencil"></span> <spring:message code="page.profile.edit" /></a>
+						</a>
+						<a class="list-group-item list-group-item-danger" href="/DTA-Services/profile/disable">
+							<span class="glyphicon glyphicon-remove"></span> <spring:message code="page.profile.disable" />
+						</a>						
+					</div>
 					
 					
 				</div>

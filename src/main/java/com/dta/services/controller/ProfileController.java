@@ -70,5 +70,16 @@ public class ProfileController {
 		
 		return "Profile";
 	}
+	
+	@RequestMapping(value="/disable",method=RequestMethod.GET)
+	public String disableProfile(Principal principal){
+		String login = principal.getName();	
+		User user = userService.getByLogin(login);		
+		user.setEnabled(false);
+		
+		userService.updateUser(user);
+		
+		return "redirect:/j_spring_security_logout";
+	}
 		
 }

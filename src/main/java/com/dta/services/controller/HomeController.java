@@ -59,6 +59,7 @@ public class HomeController {
 		user.setRole(Role.USER);
 		user.setCreation(new Date());
 		user.setPassword(passwordEncoder.encodePassword(user.getPassword(),null));
+		user.setEnabled(true);
 		
 		userService.createUser(user);
 		
