@@ -47,7 +47,7 @@
                            ng-repeat="message in ctrl.received track by $index">
                             <span style="display: inline-block; width: 8em">
                                 {{ message.author.login }}</span>
-                            <span style="border-left:1px solid gray; padding-left:1em;">
+                            <span style="border-left:1px solid #ddd; padding-left:1em;">
                                 {{ message.title }}</span>
                             <span class="pull-right">
                                 {{ message.creationDate | msgDate }}</span>
@@ -55,14 +55,14 @@
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="sent">
-                    <div class="list-group"">
+                    <div class="list-group">
                         <a class="list-group-item" href="#" class="btn-link"
                             ng-class="{'active':message.id == ctrl.selected.id}"
                             ng-click="ctrl.select($index)"
                             ng-repeat="message in ctrl.sent track by $index">
                             <span style="display: inline-block; width: 8em">
                                 {{ message.targets[0].login }}</span>
-                            <span style="border-left:1px solid gray; padding-left:1em;">
+                            <span style="border-left:1px solid #ddd; padding-left:1em;">
                                 {{ message.title }}</span>
                             <span class="pull-right">
                                 {{ message.creationDate | msgDate }}</span>
@@ -72,10 +72,15 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="panel panel-default" ng-if="ctrl.selected.id">
+            <div class="panel panel-primary" ng-if="ctrl.selected.id">
                 <div class="panel-heading">{{ ctrl.selected.title }} <span class="pull-right">{{ ctrl.selected.creationDate | msgDate }}</span></div>
                 <div class="panel-body">
-                    <p>{{ ctrl.selected.content }}</p>
+                    <p>
+                        <strong>{{ ctrl.selected.author.login }}</strong><br>
+                        pour : {{ ctrl.selected.targets[0].login }}
+                        <hr>
+                        {{ ctrl.selected.content }}
+                    </p>
                 </div>
             </div>
         </div>
