@@ -54,7 +54,7 @@
 					<ul class="list-group">
 						<c:forEach items="${userDetails.adverts }" var="advert">						
 							<li class="list-group-item">
-								<a href="/DTA-Services/advert/${ advert.id }"> ${advert.category.name}  - ${advert.title } -  ${advert.price }$</a>
+								<a href="/DTA-Services/advert/show/${ advert.id }"> ${advert.category.name}  - ${advert.title } -  ${advert.price }$</a>
 							</li>
 						</c:forEach>
 					</ul>

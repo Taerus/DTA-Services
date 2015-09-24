@@ -46,7 +46,7 @@ public class HomeController {
 		return new User();
 	}
 
-	@Secured("isAnonymous")
+	//@Secured("isAnonymous")
 	@RequestMapping(value="register",method=RequestMethod.POST)
 	public String registerUser(@Valid User user,BindingResult bindingResult, Model model){
 		
