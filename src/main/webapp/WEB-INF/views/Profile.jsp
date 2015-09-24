@@ -39,6 +39,12 @@
 						<div class="col-xs-6 col-sm-4">						
 							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="..." class="img-thumbnail">							
 						</div>
+						<c:if test="${edited}">				
+							<div class="col-sm-12 alert alert-success alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<spring:message code="page.profile.updated" />
+							</div>
+						</c:if>
 										
 					</div>
 					<ul class="list-group">
@@ -49,6 +55,7 @@
 					
 					
 				</div>
+				
 			</div>
 			<div class="col-sm-6">
 				<div class="panel panel-default">
