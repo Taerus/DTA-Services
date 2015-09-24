@@ -15,12 +15,28 @@
 		<c:import url="_HEADER_.jsp"></c:import>
 	</header>
 	<main class="container">
-		<div class="col-sm-6">
-			<h2>Débiteur</h2>
+	<div class="panel default-panel">
+		<div class="panel-body">
+			<p>
+				<strong>Vous êtes sur le point d'envoyer un paiement à ${ userTo }
+					:</strong>
+			</p>
+			<form class="form-horizontal" action="#" method="POST">
+				<div class="form-group">
+					<label class="control-label col-sm-3">Montant : </label>
+					<div class="col-sm-3">
+						<input class="form-control" name="credits" type="number" />
+					</div>
+				</div>
+			</form>
 		</div>
+	</div>
 	</main>
 	<footer>
 		<c:import url="_FOOTER_.jsp"></c:import>
 	</footer>
+	<script>
+		console.log("${ userTo }")
+	</script>
 </body>
 </html>

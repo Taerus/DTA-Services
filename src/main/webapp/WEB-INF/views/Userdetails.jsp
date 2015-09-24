@@ -26,7 +26,7 @@
 							<p> <strong> ${userDetails.country}, </strong>  ${userDetails.department}</p>
 							<div class="form-inline">
 								<div class="form-group">
-									<a class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope" ></span></a>
+									<a href="/DTA-Services/payment/${ userDetails.id }" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope" ></span></a>
 									<a class="btn btn-success btn-sm"><span class="glyphicon glyphicon-usd" ></span></a>
 								</div>
 							</div>							
