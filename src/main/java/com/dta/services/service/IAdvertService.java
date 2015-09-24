@@ -5,6 +5,13 @@ import java.util.List;
 import com.dta.services.model.Advert;
 import com.dta.services.model.Category;
 
+/**
+ * 
+ * Interface of service layer of advert
+ * 
+ * @author Hugo Dumont
+ *
+ */
 public interface IAdvertService {
 
 	public List<Advert> list();

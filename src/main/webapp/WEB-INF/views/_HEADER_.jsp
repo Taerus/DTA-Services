@@ -13,6 +13,7 @@
 			<li><a href="/DTA-Services/adverts/"><spring:message code="page.header.adverts"></spring:message></a></li>
 		</ul>
 		
+
 		<s:authorize access="hasRole('USER')">					
 			
 			<div class="navbar-form navbar-right">
@@ -31,7 +32,8 @@
 	          	<span class="nav-action">
 					<a class="btn btn-danger" href="/DTA-Service/j_security_log_out" ><span class="glyphicon glyphicon-log-out"></span></a>
 				</span>
-			</ul>
+
+			</div>
 			
 		</s:authorize>
 		
