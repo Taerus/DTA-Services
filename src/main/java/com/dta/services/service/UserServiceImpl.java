@@ -13,7 +13,7 @@ import com.dta.services.model.User;
 public class UserServiceImpl implements IUserService {
 	@Autowired
 	private IUserDao userDao;
-
+	
 	@Transactional(rollbackFor=Exception.class)
 	public void createUser(User user) {
 		userDao.create(user);		
