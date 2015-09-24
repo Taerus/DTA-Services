@@ -34,4 +34,9 @@ public class UserServiceImpl implements IUserService {
 		return userDao.getByLogin(login);
 	}
 
+	@Transactional(rollbackFor=Exception.class)
+	public void updateUser(User user) {
+		userDao.update(user);		
+	}
+
 }

@@ -10,6 +10,8 @@ public abstract class Message {
     @Id @GeneratedValue
     private long id;
 
+    private String title;
+
     private Date creationDate;
 
     private String content;
@@ -28,17 +30,30 @@ public abstract class Message {
         this.author = author;
     }
 
+
     // -------- getter / setter --------
 
     public long getId() {
-		return id;
-	}
-    
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Date getCreationDate() {
         return creationDate;
     }
 
-	public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -46,11 +61,7 @@ public abstract class Message {
         return content;
     }
 
-    public void setId(long id) {
-		this.id = id;
-	}
-
-	public void setContent(String content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

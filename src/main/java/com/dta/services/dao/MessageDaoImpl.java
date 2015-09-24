@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
+import com.dta.services.model.PrivateMessage;
 import org.springframework.stereotype.Repository;
 
 import com.dta.services.model.Message;
@@ -15,28 +18,74 @@ public class MessageDaoImpl implements IMessageDao {
 	EntityManager em;
 
 	@Override
-	public void create(Message message) {
+	public void createMessage(Message message) {
 		em.persist(message);
 	}
 
 	@Override
-	public Message getById(long id) {
+	public Message getMessageById(long id) {
 		return em.find(Message.class, id);
 	}
 
 	@Override
-	public List<Message> list() {
-		return em.createQuery("SELECT m FROM Message m").getResultList();
+	public List<Message> listMessages() {
+		return em.createQuery("SELECT m FROM Message m", Message.class).getResultList();
 	}
 
 	@Override
-	public void update(Message message) {
+	public void updateMessage(Message message) {
 		em.merge(message);
 	}
 
 	@Override
-	public void delete(int id) {
+	public void deleteMessage(long id) {
 		em.remove(em.find(Message.class, id));
 	}
 
+
+	// ------------ Private Messages ------------
+
+	@Override
+	public PrivateMessage getPrivateMessageById(long id) {
+		return em.find(PrivateMessage.class, id);
+	}
+
+	@Override
+	public List<PrivateMessage> getPrivateMessagesByAuthor(long authorId) {
+		TypedQuery<PrivateMessage> query = em.createQuery(
+				"SELECT msg " +
+						"FROM PrivateMessage msg " +
+						"WHERE msg.author.id = :author_id",
+				PrivateMessage.class
+		);
+
+		query.setParameter("author_id", authorId);
+
+		return query.getResultList();
+	}
+
+	@Override
+	public List<PrivateMessage> getPrivateMessagesByTarget(long targetId) {
+		TypedQuery<PrivateMessage> query = em.createQuery(
+				"SELECT msg " +
+						"FROM PrivateMessage msg " +
+						"JOIN msg.targets to " +
+						"WHERE to.id = :target_id",
+				PrivateMessage.class
+		);
+
+		query.setParameter("target_id", targetId);
+
+		return query.getResultList();
+	}
+
+	@Override
+	public List<PrivateMessage> listPrivateMessages() {
+		TypedQuery<PrivateMessage> query = em.createQuery(
+				"SELECT msg FROM PrivateMessage msg",
+				PrivateMessage.class
+		);
+
+		return query.getResultList();
+	}
 }
