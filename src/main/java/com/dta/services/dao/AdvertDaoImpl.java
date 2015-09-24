@@ -36,7 +36,7 @@ public class AdvertDaoImpl implements IAdvertDao {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(long id) {
 		em.remove(em.find(Advert.class, id));
 	}
 

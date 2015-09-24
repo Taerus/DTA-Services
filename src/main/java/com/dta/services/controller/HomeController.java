@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dta.services.model.Category;
 import com.dta.services.model.Role;
 import com.dta.services.model.User;
 import com.dta.services.service.IUserService;
 import com.dta.services.utils.PasswordEncoder;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -43,15 +45,9 @@ public class HomeController {
 	public User user(){
 		return new User();
 	}
-	
-	@RequestMapping
-	public String home(){
-		return "Home";
-	}
-	
-	@Secured("isAnonymous")
+
 	@RequestMapping(value="register",method=RequestMethod.POST)
-	public String registerUser(@Valid User user,BindingResult bindingResult,Model model){
+	public String registerUser(@Valid User user,BindingResult bindingResult, Model model){
 		
 		if(bindingResult.hasErrors()){
 			model.addAttribute("user", user);
@@ -66,50 +62,21 @@ public class HomeController {
 		
 		userService.createUser(user);
 		
+		model.addAttribute("user",new User());
+		
 		return "Registered";
 	}
 	
-	@RequestMapping(value="users",method=RequestMethod.GET)
-	public String viewUsers(){
+	@RequestMapping(value = "users", method = RequestMethod.GET)
+	public String viewUsers() {
 		return "Usersview";
 	}
+
 	
-	@RequestMapping(value="adverts")
-	public String listAdverts(){
-		return "Advertsview";
-	}
-
-	@Secured("hasAnyRole('USER', 'ADMIN')")
-	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
-	public String postAdvert(Model model) {
-        Advert advert = new Advert();
-        advert.setPrice(1);
-
-        model.addAttribute("advert", advert);
-
-		return "PostAdvert";
-	}
-
-	@Secured("hasAnyRole('USER', 'ADMIN')")
-    @RequestMapping(value = "advert/new", method = RequestMethod.POST)
-    public String postAdvert(@Valid Advert advert, Model model, BindingResult bindingResult) {
-
-		if (bindingResult.hasErrors()) {
-			return "PostAdvert";
-		}
-
-        advert.setType(AdvertType.ADVERT);
-        advert.setCreation(new Date());
-		advertService.createAdvert(advert);
-
-        return "redirect:/";
-    }
-    
     @RequestMapping(value="user/{id}",method=RequestMethod.GET)
     public String userDetails(@PathVariable("id") Long id,Model model){
     	model.addAttribute("userDetails",userService.get(id));
     	
     	return "Userdetails";
     }
-
 }
