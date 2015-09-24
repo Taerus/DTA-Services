@@ -21,5 +21,19 @@
 	<footer>
 		<c:import url="_FOOTER_.jsp"></c:import>
 	</footer>
+	<c:if test="${showModal !=null }">
+		<script>
+			$(document).ready(function(){
+				$.each($('.wrap-text'),function(){					
+					var newHtml = $(this).html();					
+					newHtml = newHtml.substr(0,20);
+					newHtml+= "...";					
+				});
+				
+				$('#registerModal').modal('show');
+				
+			});
+		</script>
+	</c:if>
 </body>
 </html>

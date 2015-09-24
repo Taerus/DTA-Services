@@ -28,6 +28,7 @@ dependencies {
     compile         'org.springframework:spring-orm:'       + springVersion
     compile         'org.springframework.security:spring-security-web:'     + springVersion
     compile         'org.springframework.security:spring-security-config:'  + springVersion
+    compile         'org.springframework.security:spring-security-taglibs:'  + springVersion
 
     compile         'javax.servlet:servlet-api:2.5'
     compile         'javax.servlet.jsp:jsp-api:2.1'
