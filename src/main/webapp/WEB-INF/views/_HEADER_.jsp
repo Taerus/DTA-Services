@@ -13,23 +13,36 @@
 			<li><a href="/DTA-Services/adverts/"><spring:message code="page.header.adverts"></spring:message></a></li>
 		</ul>
 		
-		<s:authorize access="hasRole('USER')">
-			<a href="/DTA-Services/advert/new/" class="btn btn-warning" role="button"><spring:message code="page.header.postAdvert" /></a>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/DTA-Services/j_spring_security_logout"><spring:message code="page.header.logout" /> </a></li>
-			</ul>
-			<p class="navbar-text navbar-right"><spring:message code="page.header.signedin" /> <a href="#" class="navbar-link"><s:authentication property="principal.username" /></a></p>
+
+		<s:authorize access="hasRole('USER')">					
+			
+			<div class="navbar-form navbar-right">
+				<span class="nav-action">					
+					<a href="/DTA-Services/advert/new/" class="btn btn-warning" role="button"><spring:message code="page.header.postAdvert" /></a>
+				</span>
+				
+				<span class="btn-group dropdown">
+					<button class="btn" ><s:authentication property="principal.username"/> </button>
+					<button class="btn dropdown-toggle" data-toggle="dropdown" > <span class="caret"></span> </button>
+					<ul class="dropdown-menu">
+			            <li><a href="/DTA-Services/profile">Profile</a></li>
+			            <li><a href="/DTA-Services/user/messages">Inbox</a></li>		            
+		          	</ul>
+	          	</span>	
+	          	<span class="nav-action">
+					<a class="btn btn-danger" href="/DTA-Service/j_security_log_out" ><span class="glyphicon glyphicon-log-out"></span></a>
+				</span>
+
+			</div>
 			
 		</s:authorize>
 		
-		
-		
 		<s:authorize access="isAnonymous()">
 			<form class="navbar-form navbar-right" action="/DTA-Services/j_spring_security_check" method="POST">
-			<input class="form-control" name="j_username" type="text" placeholder="<spring:message code="page.header.login"></spring:message>"/>
-			<input class="form-control" name="j_password" type="password" placeholder="<spring:message code="page.header.password"></spring:message>" />
-			<button type="submit" class="btn btn-success"><spring:message code="page.header.signin" /></button>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" ><spring:message code="page.header.register" /></button>								
+				<input class="form-control" name="j_username" type="text" placeholder="<spring:message code="page.header.login"></spring:message>"/>
+				<input class="form-control" name="j_password" type="password" placeholder="<spring:message code="page.header.password"></spring:message>" />
+				<button type="submit" class="btn btn-success"><spring:message code="page.header.signin" /></button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" ><spring:message code="page.header.register" /></button>								
 			</form>
 		</s:authorize>
 	</div>
