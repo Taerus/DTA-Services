@@ -24,14 +24,16 @@
 		    		<em>${ myAdvert.description }</em>
 		  		</div>
 		  		<ul class="list-group">
-				    <li class="list-group-item"><strong>auteur : </strong></li>
+				    <li class="list-group-item"><strong>auteur : </strong>${ myAdvert.author.login }</li>
 				    <li class="list-group-item"><strong>catégorie concernée : </strong>${ myAdvert.category.name }</li>
 				    <li class="list-group-item"><strong>crédit(s) : </strong>${ myAdvert.price }</li>
 			  	</ul>
 			</div>
 			
-			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAdvert">Suppression</button>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editAdvert">Edition</button>
+			<c:if test="${isAuthor }">
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAdvert">Suppression</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editAdvert">Edition</button>
+			</c:if>
 			
 			<div id="deleteAdvert" class="modal fade">
 				<div class="modal-dialog">

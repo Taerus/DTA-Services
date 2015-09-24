@@ -16,7 +16,6 @@
 		<s:authorize access="hasRole('USER')">
 			<a href="/DTA-Services/advert/new/" class="btn btn-warning" role="button"><spring:message code="page.header.postAdvert" /></a>
 			<ul class="nav navbar-nav navbar-right">
-			
 				<li><a href="/DTA-Services/j_spring_security_logout"><spring:message code="page.header.logout" /> </a></li>
 			</ul>
 			<p class="navbar-text navbar-right"><spring:message code="page.header.signedin" /> <a href="#" class="navbar-link"><s:authentication property="principal.username" /></a></p>

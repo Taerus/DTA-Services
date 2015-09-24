@@ -1,6 +1,6 @@
-angular.module("dta_services", []);
+angular.module("dta_services", []); //API for adverts control
 
-
+/*Definition of the advert controller for listing adverts*/
 angular.module("dta_services").controller("AdvertsController",['AdvertsService',function(AdvertsService){
 	var advertsController = this;
 	
@@ -19,6 +19,7 @@ angular.module("dta_services").controller("AdvertsController",['AdvertsService',
 	
 }]);
 
+/*Definition of the advertservice to handdle hhtp request*/
 angular.module("dta_services").factory("AdvertsService",['$http',function ($http) {
 	"use strict";
 	

@@ -2,11 +2,15 @@ package com.dta.services.controller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.dta.services.model.User;
 import com.dta.services.service.IUserService;
 
+
 @Controller
-@Secured("isAuthenticated()")
+@PreAuthorize("hasAnyRole('USER','ADMIN')")
 @RequestMapping(value="/profile")
 public class ProfileController {
 	
@@ -27,26 +32,54 @@ public class ProfileController {
 		return new User();
 	}	 
 	
-	@Secured("isAuthenticated()")
 	@RequestMapping(value="")
 	public String viewProfile(Model model,Principal principal){
-		String login = principal.getName();
-		
+		String login = principal.getName();		
+			
 		model.addAttribute("userProfile",userService.getByLogin(login));
 		
 		return "Profile";
 	}
 	
-	@Secured("isAuthenticated()")
 	@RequestMapping(value="/edit")
-	public String editProfile(){
+	public String editProfile(Model model,Principal principal){
+		String login = principal.getName();		
+		
+		model.addAttribute("userProfile",userService.getByLogin(login));
+		
 		return "Editprofile";
 	}	
 	
-	@Secured("isAuthenticated()")
 	@RequestMapping(value="/edit",method=RequestMethod.POST)
-	public String saveProfile(){
+	public String saveProfile(@Valid User userProfile,BindingResult bindingResult,Model model,Principal principal){
+		String login = principal.getName();	
+		User user = userService.getByLogin(login);			
+		
+		if(bindingResult.hasErrors()){
+			return "Editprofile";
+		}
+		
+		user.setDepartment(userProfile.getDepartment());
+		user.setCountry(userProfile.getCountry());
+		user.setEmail(userProfile.getEmail());
+		
+		userService.updateUser(user);
+		
+		model.addAttribute("userProfile",user);
+		model.addAttribute("edited",true);
+		
 		return "Profile";
+	}
+	
+	@RequestMapping(value="/disable",method=RequestMethod.GET)
+	public String disableProfile(Principal principal){
+		String login = principal.getName();	
+		User user = userService.getByLogin(login);		
+		user.setEnabled(false);
+		
+		userService.updateUser(user);
+		
+		return "redirect:/j_spring_security_logout";
 	}
 		
 }

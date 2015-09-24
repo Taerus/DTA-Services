@@ -35,6 +35,11 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Transactional(rollbackFor=Exception.class)
+	public void updateUser(User user) {
+		userDao.update(user);		
+	}
+
+	@Transactional(rollbackFor=Exception.class)
 	public void creditTranfert(User from, User to, int sum) {
 		from.setBalance(from.getBalance()-sum);
 		to.setBalance(to.getBalance()+sum);
