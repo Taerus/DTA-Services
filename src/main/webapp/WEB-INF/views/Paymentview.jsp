@@ -18,16 +18,19 @@
 	<div class="panel default-panel">
 		<div class="panel-body">
 			<p>
-				<strong>Vous êtes sur le point d'envoyer un paiement à ${ userTo }
+				<strong>Vous êtes sur le point d'envoyer un paiement à ${ userTo.login }
 					:</strong>
 			</p>
-			<form class="form-horizontal" action="#" method="POST">
+			<form class="form-horizontal" action="/DTA-Services/payment" method="POST">
+				<input type="hidden" value="${ userTo.id }" name="toId">
 				<div class="form-group">
 					<label class="control-label col-sm-3">Montant : </label>
 					<div class="col-sm-3">
 						<input class="form-control" name="credits" type="number" />
 					</div>
+					<button type="submit" class="btn btn-primary">Envoyer</button>
 				</div>
+
 			</form>
 		</div>
 	</div>
@@ -35,8 +38,5 @@
 	<footer>
 		<c:import url="_FOOTER_.jsp"></c:import>
 	</footer>
-	<script>
-		console.log("${ userTo }")
-	</script>
 </body>
 </html>

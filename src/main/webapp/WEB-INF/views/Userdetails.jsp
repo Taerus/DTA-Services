@@ -24,17 +24,7 @@
 						<div class="col-xs-6 col-sm-8">
 							<h1> ${userDetails.login }</h1>
 							<p>  <a href="mailto:${userDetails.email }">${userDetails.email }</a></p>
-<<<<<<< HEAD
 							<p> <strong> ${userDetails.country}, </strong>  ${userDetails.department}</p>
-							<div class="form-inline">
-								<div class="form-group">
-									<a href="/DTA-Services/payment/${ userDetails.id }" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope" ></span></a>
-									<a class="btn btn-success btn-sm"><span class="glyphicon glyphicon-usd" ></span></a>
-								</div>
-							</div>							
-=======
-							<p> <strong> ${userDetails.country}, </strong>  ${userDetails.department}</p>								
->>>>>>> master
 						</div>
 						<div class="col-xs-6 col-sm-4">						
 							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="..." class="img-thumbnail">							

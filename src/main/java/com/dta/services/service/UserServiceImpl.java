@@ -34,4 +34,12 @@ public class UserServiceImpl implements IUserService {
 		return userDao.getByLogin(login);
 	}
 
+	@Transactional(rollbackFor=Exception.class)
+	public void creditTranfert(User from, User to, int sum) {
+		from.setBalance(from.getBalance()-sum);
+		to.setBalance(to.getBalance()+sum);
+		
+		userDao.update(from);
+		userDao.update(to);
+	}
 }
