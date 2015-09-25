@@ -1,7 +1,7 @@
 angular.module("dta-services")
     .controller("MessageListController", MessageListController);
 
-function MessageListController(MessageService) {
+function MessageListController(MessageService, $scope, $location) {
     "use strict";
     var _this = this;
 
@@ -37,6 +37,23 @@ function MessageListController(MessageService) {
             _this.selected = _this.messages[idx];
         }
     };
+
+    _this.setTab = function(t) {
+        _this.tab = t;
+        _this.select(0, t);
+        _this.receivedTab = t == 'r';
+        _this.sentTab = t == 's';
+    };
+
+    $scope.$watch(function () {
+        return $location.url();
+    }, function (value) {
+        if(value == '/received') {
+            _this.setTab('r');
+        } else if(value == '/sent') {
+            _this.setTab('s');
+        }
+    });
 
     function sortMessage(messages) {
         if(messages) {

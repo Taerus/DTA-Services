@@ -26,7 +26,7 @@
     <div ng-controller="MessageListController as ctrl" ng-init="ctrl.load(${userId})" class="row">
 
         <tabset  class="col-md-6">
-            <tab heading="Messages reçus" select="ctrl.onReceivedSelected()">
+            <tab heading="Messages reçus" select="ctrl.onReceivedSelected()" active="ctrl.receivedTab">
                 <div class="list-group">
                     <a class="list-group-item" href="#" class="btn-link"
                        ng-class="{'active':message.id == ctrl.selected.id}"
@@ -41,7 +41,7 @@
                     </a>
                 </div>
             </tab>
-            <tab heading="Messages envoyés" select="ctrl.onSentSelected()">
+            <tab heading="Messages envoyés" select="ctrl.onSentSelected()" active="ctrl.sentTab">
                 <div class="list-group">
                     <a class="list-group-item" href="#" class="btn-link"
                        ng-class="{'active':message.id == ctrl.selected.id}"
@@ -88,6 +88,9 @@
 
     </div>
 </main>
+
+<a href="#sent">sent</a>
+<a href="#received">received</a>
 
 <footer>
     <c:import url="_FOOTER_.jsp"/>
