@@ -64,7 +64,6 @@ public class AdvertController {
 	
 	
 	/*Root to listing all adverts*/
-	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "adverts")
 	public String listAdverts(Model model) {
 
@@ -72,7 +71,7 @@ public class AdvertController {
 	}
 
 	
-	/*Root to show the form add of adverts*/
+	/*root to show the form add of adverts*/
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
 	public String postAdvert(Model model, Principal principal) {
