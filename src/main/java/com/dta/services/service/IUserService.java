@@ -10,4 +10,5 @@ public interface IUserService {
 	public User get(Long id);
 	public User getByLogin(String login);
 	public void updateUser(User user);
+	public void creditTranfert(User from, User to, int sum);
 }

@@ -13,7 +13,7 @@ import com.dta.services.model.User;
 public class UserServiceImpl implements IUserService {
 	@Autowired
 	private IUserDao userDao;
-
+	
 	@Transactional(rollbackFor=Exception.class)
 	public void createUser(User user) {
 		userDao.create(user);		
@@ -39,4 +39,12 @@ public class UserServiceImpl implements IUserService {
 		userDao.update(user);		
 	}
 
+	@Transactional(rollbackFor=Exception.class)
+	public void creditTranfert(User from, User to, int sum) {
+		from.setBalance(from.getBalance()-sum);
+		to.setBalance(to.getBalance()+sum);
+		
+		userDao.update(from);
+		userDao.update(to);
+	}
 }
