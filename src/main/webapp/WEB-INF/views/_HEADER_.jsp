@@ -25,8 +25,8 @@
 					<button class="btn" ><s:authentication property="principal.username"/> </button>
 					<button class="btn dropdown-toggle" data-toggle="dropdown" > <span class="caret"></span> </button>
 					<ul class="dropdown-menu">
-			            <li><a href="/DTA-Services/profile">Profile</a></li>
-			            <li><a href="/DTA-Services/user/messages">Inbox</a></li>		            
+			            <li><a href="/DTA-Services/profile"><span class="glyphicon glyphicon-user"></span> <spring:message code="page.header.profile" /></a></li>
+			            <li><a href="/DTA-Services/user/messages"><span class="glyphicon glyphicon-envelope"></span> <spring:message code="page.header.inbox" /></a></li>		            
 		          	</ul>
 	          	</span>	
 	          	<span class="nav-action">
