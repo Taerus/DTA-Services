@@ -21,16 +21,24 @@
 		<div class="well">
 			
 			<f:form class="form-horizontal" modelAttribute="userProfile" action="/DTA-Services/profile/edit" method="POST" >
-				<div class="form-group">
-					<label class="col-sm-3 control-label"><spring:message code="page.profile.edit.country" /></label>
-					<div class="col-sm-3">
-						<f:input type="text" class="form-control" path="country" />
-					</div>
-					<label class="col-sm-3 control-label" ><spring:message code="page.profile.edit.department" /></label>
-					<div class="col-sm-3">
-						<f:input type="text" class="form-control" path="department"/>
-					</div>
-				</div>
+				<div class="form-group">        		
+	        		<label class="col-sm-3 control-label" >
+	        			<spring:message code="page.profile.edit.country" ></spring:message>
+	        		</label>
+	        		<div class="col-sm-3">
+	        			<f:select path="country" class="form-control"  >
+	        				<f:options items="${com.dta.services.model.Country.values() }" itemLabel="name" />
+	        			</f:select>
+	        		</div> 
+	        		<label class="col-sm-3 control-label" >
+	        			<spring:message code="page.profile.edit.department" ></spring:message>
+	        		</label>
+	        		<div class="col-sm-3">
+	        			<f:select path="department" class="form-control"     >
+	        				<f:options items="${com.dta.services.model.Department.values() }" itemLabel="name" />
+	        			</f:select>
+	        		</div>      		
+	        	</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label"><spring:message code="page.profile.edit.email" /></label>
 					<div class="col-sm-9">

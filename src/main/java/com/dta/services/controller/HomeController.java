@@ -1,5 +1,6 @@
 package com.dta.services.controller;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 import com.dta.services.model.AdvertType;
@@ -59,9 +60,19 @@ public class HomeController {
 		user.setRole(Role.USER);
 		user.setCreation(new Date());
 		user.setPassword(passwordEncoder.encodePassword(user.getPassword(),null));
-		user.setEnabled(true);
+		user.setEnabled(true);		
 		
-		userService.createUser(user);
+		try{
+			userService.createUser(user);
+		}	
+		catch(Exception e){
+			user.setLogin("");
+			user.setPassword("");
+			model.addAttribute("user", user);
+			model.addAttribute("showModal",true);
+			model.addAttribute("errorMessage",true);
+			return "Home";
+		}		
 		
 		model.addAttribute("user",new User());
 		

@@ -24,7 +24,7 @@
 						<div class="col-xs-6 col-sm-8">
 							<h1> ${userDetails.login }</h1>
 							<p>  <a href="mailto:${userDetails.email }">${userDetails.email }</a></p>
-							<p> <strong> ${userDetails.country}, </strong>  ${userDetails.department}</p>
+							<p> <strong> ${userDetails.country.name}, </strong>  ${userDetails.department.name}</p>
 						</div>
 						<div class="col-xs-6 col-sm-4">						
 							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="..." class="img-thumbnail">							
