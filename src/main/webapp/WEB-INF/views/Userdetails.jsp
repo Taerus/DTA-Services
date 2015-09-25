@@ -37,10 +37,10 @@
 								<a class="text-info" href="/DTA-Services/message/new?to=${userDetails.id}"><span class="glyphicon glyphicon-envelope" ></span> <spring:message code="page.userDetails.sendMessage" /> </a>
 							</li>
 							<li class="list-group-item">
-								<a class="text-success" href="/DTA-Services/payment/${userDetails.id }"><span class="glyphicon glyphicon-usd" ></span> <spring:message code="page.userDetails.requestPayment" /></a>
+								<a class="text-success" href="/DTA-Services/payment/request/${userDetails.id }"><span class="glyphicon glyphicon-usd" ></span> <spring:message code="page.userDetails.requestPayment" /></a>
 							</li>
 							<li class="list-group-item">
-								<a class="text-warning" href="/DTA-Services/payment/request/${userDetails.id }"><span class="glyphicon glyphicon-usd" ></span> <spring:message code="page.userDetails.sendPayment" /></a>
+								<a class="text-warning" href="/DTA-Services/payment/${userDetails.id }"><span class="glyphicon glyphicon-usd" ></span> <spring:message code="page.userDetails.sendPayment" /></a>
 							</li>
 						</ul>						
 					</s:authorize>
