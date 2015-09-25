@@ -34,13 +34,26 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/message/new", method = RequestMethod.GET)
-    public String writeMessage(@RequestParam("to") Long targetId, Model model) {
+    public String writeMessage(
+            @RequestParam("to") Long targetId,
+            @RequestParam(value = "re", required = false) Long messageId,
+            Model model) {
 
         ArrayList<Long> targets = new ArrayList<>(5);
         if (targetId != null) targets.add(targetId);
 
         MessageForm messageForm = new MessageForm();
         messageForm.setTargets(targets);
+
+        if (messageId != null) {
+            PrivateMessage message = messageService.getPrivateMessage(messageId);
+            messageForm.setSubject("RE:"+message.getTitle());
+            messageForm.setContent("\n\n\n" +
+                    "=====================================\n" +
+                    message.getAuthor().getLogin()+" a écrit ("+message.getCreationDate()+")\n" +
+                    "------------------------------------------------------------------\n" +
+                    message.getContent());
+        }
 
         model.addAttribute("message", messageForm);
 
@@ -71,7 +84,7 @@ public class MessageController {
 
         System.out.println(message.getTargets());
 
-        return "Home";
+        return "redirect:/user/messages";
     }
 
     @RequestMapping(value = "/user/messages", method = RequestMethod.GET)

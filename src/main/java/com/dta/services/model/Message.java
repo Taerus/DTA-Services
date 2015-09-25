@@ -14,6 +14,7 @@ public abstract class Message {
 
     private Date creationDate;
 
+    @Column(length = 8192)
     private String content;
 
     private User author;

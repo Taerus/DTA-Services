@@ -1,22 +1,19 @@
 package com.dta.services.controller;
 
-import java.util.List;
-
+import com.dta.services.model.Advert;
 import com.dta.services.model.PrivateMessage;
+import com.dta.services.model.User;
+import com.dta.services.service.IAdvertService;
 import com.dta.services.service.IMessageService;
+import com.dta.services.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.dta.services.model.Advert;
-import com.dta.services.model.User;
-import com.dta.services.service.IAdvertService;
-import com.dta.services.service.IUserService;
+import java.util.List;
 
 @Controller
 @RequestMapping(value="/API")

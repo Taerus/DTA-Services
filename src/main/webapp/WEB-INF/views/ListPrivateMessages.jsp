@@ -9,9 +9,9 @@
     <title><spring:message code="page.listPrivateMessage.title"/></title>
     <c:import url="_STYLESHEETS_.jsp"/>
     <c:import url="_SCRIPT_.jsp"/>
-    <script src="/DTA-Services/js/service/message-service.js"></script>
-    <script src="/DTA-Services/js/filter/message-filter.js"></script>
-    <script src="/DTA-Services/js/controller/message-controller.js"></script>
+    <script src="<spring:url value="/js/service/message-service.js" />"></script>
+    <script src="<spring:url value="/js/filter/message-filter.js" />"></script>
+    <script src="<spring:url value="/js/controller/message-controller.js" />"></script>
 </head>
 <body ng-app="dta-services">
 
@@ -24,66 +24,68 @@
 
 <main class="container">
     <div ng-controller="MessageListController as ctrl" ng-init="ctrl.load(${userId})" class="row">
-        <div class="col-md-6">
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#received" aria-controls="received" role="tab" data-toggle="tab" ng-click="ctrl.select(0, 'r')">
-                        Messages reçus
-                    </a>
-                </li>
-                <li role="presentation">
-                    <a href="#sent" aria-controls="sent" role="tab" data-toggle="tab" ng-click="ctrl.select(0, 's')">
-                        Messages envoyés
-                    </a>
-                </li>
-            </ul>
 
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="received">
-                    <div class="list-group">
-                        <a class="list-group-item" href="#" class="btn-link"
-                           ng-class="{'active':message.id == ctrl.selected.id}"
-                           ng-click="ctrl.select($index)"
-                           ng-repeat="message in ctrl.received track by $index">
+        <tabset  class="col-md-6">
+            <tab heading="Messages reçus" select="ctrl.onReceivedSelected()">
+                <div class="list-group">
+                    <a class="list-group-item" href="#" class="btn-link"
+                       ng-class="{'active':message.id == ctrl.selected.id}"
+                       ng-click="ctrl.select($index)"
+                       ng-repeat="message in ctrl.received track by $index">
                             <span style="display: inline-block; width: 8em">
                                 {{ message.author.login }}</span>
                             <span style="border-left:1px solid #ddd; padding-left:1em;">
                                 {{ message.title }}</span>
                             <span class="pull-right">
                                 {{ message.creationDate | msgDate }}</span>
-                        </a>
-                    </div>
+                    </a>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="sent">
-                    <div class="list-group">
-                        <a class="list-group-item" href="#" class="btn-link"
-                            ng-class="{'active':message.id == ctrl.selected.id}"
-                            ng-click="ctrl.select($index)"
-                            ng-repeat="message in ctrl.sent track by $index">
+            </tab>
+            <tab heading="Messages envoyés" select="ctrl.onSentSelected()">
+                <div class="list-group">
+                    <a class="list-group-item" href="#" class="btn-link"
+                       ng-class="{'active':message.id == ctrl.selected.id}"
+                       ng-click="ctrl.select($index)"
+                       ng-repeat="message in ctrl.sent track by $index">
                             <span style="display: inline-block; width: 8em">
                                 {{ message.targets[0].login }}</span>
                             <span style="border-left:1px solid #ddd; padding-left:1em;">
                                 {{ message.title }}</span>
                             <span class="pull-right">
                                 {{ message.creationDate | msgDate }}</span>
-                        </a>
-                    </div>
+                    </a>
                 </div>
+            </tab>
+        </tabset>
+
+        <div class="col-md-6" ng-if="ctrl.selected.id">
+            <div class="form-group">
+                <button ng-if="ctrl.tab == 's'" class="btn btn-primary" disabled >
+                    <spring:message code="page.listPrivateMessage.control.respond" />
+                </button>
+                <a ng-if="ctrl.tab != 's'" class="btn btn-primary"
+                   href="<spring:url value="/message/new" />?to={{ ctrl.selected.author.id }}&re={{ ctrl.selected.id }}">
+                    <spring:message code="page.listPrivateMessage.control.respond" />
+                </a>
+                <button class="btn btn-danger">
+                    <spring:message code="page.listPrivateMessage.control.delete" />
+                </button>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-primary" ng-if="ctrl.selected.id">
-                <div class="panel-heading">{{ ctrl.selected.title }} <span class="pull-right">{{ ctrl.selected.creationDate | msgDate }}</span></div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{ ctrl.selected.title }}
+                    <span class="pull-right">{{ ctrl.selected.creationDate | msgDate }}</span>
+                </div>
                 <div class="panel-body">
                     <p>
                         <strong>{{ ctrl.selected.author.login }}</strong><br>
                         pour : {{ ctrl.selected.targets[0].login }}
                         <hr>
-                        {{ ctrl.selected.content }}
+                        <span style="white-space: pre-wrap">{{ ctrl.selected.content }}</span>
                     </p>
                 </div>
             </div>
         </div>
+
     </div>
 </main>
 

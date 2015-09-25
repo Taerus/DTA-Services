@@ -42,7 +42,7 @@ public class MessageServiceImpl implements IMessageService {
     @Override
     @Transactional(readOnly = true)
     public PrivateMessage getPrivateMessage(long id) {
-        return null;
+        return messageDao.getPrivateMessageById(id);
     }
 
     @Override

@@ -16,6 +16,16 @@ function MessageListController(MessageService) {
         });
     };
 
+    _this.onReceivedSelected = function() {
+        _this.select(0, 'r');
+        _this.tab = 'r';
+    };
+
+    _this.onSentSelected = function() {
+        _this.select(0, 's');
+        _this.tab = 's';
+    };
+
     _this.select = function(idx, tab) {
         if(tab == 'r') {
             _this.messages = _this.received;
@@ -23,7 +33,9 @@ function MessageListController(MessageService) {
             _this.messages = _this.sent;
         }
 
-        _this.selected = _this.messages[idx];
+        if(_this.messages) {
+            _this.selected = _this.messages[idx];
+        }
     };
 
     function sortMessage(messages) {

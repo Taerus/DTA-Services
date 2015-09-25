@@ -1,1 +1,1 @@
-angular.module("dta-services", []);
+angular.module("dta-services", ['ui.bootstrap']);
