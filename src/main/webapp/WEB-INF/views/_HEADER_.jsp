@@ -30,7 +30,7 @@
 		          	</ul>
 	          	</span>	
 	          	<span class="nav-action">
-					<a class="btn btn-danger" href="/DTA-Service/j_security_log_out" ><span class="glyphicon glyphicon-log-out"></span></a>
+					<a class="btn btn-danger" href="/DTA-Services/j_spring_security_logout" ><span class="glyphicon glyphicon-log-out"></span></a>
 				</span>
 
 			</div>
