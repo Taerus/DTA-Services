@@ -34,7 +34,7 @@
 					<s:authorize access="hasRole('USER')">
 						<ul class="list-group">
 							<li class="list-group-item">
-								<a class="text-info" href="#"><span class="glyphicon glyphicon-envelope" ></span> <spring:message code="page.userDetails.sendMessage" /> </a>
+								<a class="text-info" href="/DTA-Services/message/new?to=${userDetails.id}"><span class="glyphicon glyphicon-envelope" ></span> <spring:message code="page.userDetails.sendMessage" /> </a>
 							</li>
 							<li class="list-group-item">
 								<a class="text-success" href="#"><span class="glyphicon glyphicon-usd" ></span> <spring:message code="page.userDetails.requestPayment" /></a>

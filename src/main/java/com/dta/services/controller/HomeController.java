@@ -46,7 +46,6 @@ public class HomeController {
 		return new User();
 	}
 
-	//@Secured("isAnonymous")
 	@RequestMapping(value="register",method=RequestMethod.POST)
 	public String registerUser(@Valid User user,BindingResult bindingResult, Model model){
 		
@@ -60,6 +59,7 @@ public class HomeController {
 		user.setRole(Role.USER);
 		user.setCreation(new Date());
 		user.setPassword(passwordEncoder.encodePassword(user.getPassword(),null));
+		user.setEnabled(true);
 		
 		userService.createUser(user);
 		

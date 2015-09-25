@@ -39,16 +39,26 @@
 						<div class="col-xs-6 col-sm-4">						
 							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="..." class="img-thumbnail">							
 						</div>
+						<c:if test="${edited}">				
+							<div class="col-sm-12 alert alert-success alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<spring:message code="page.profile.updated" />
+							</div>
+						</c:if>
 										
 					</div>
-					<ul class="list-group">
-						<li class="list-group-item">
-							<a href="/DTA-Services/profile/edit"><span class="glyphicon glyphicon-pencil"></span> <spring:message code="page.profile.edit" /></a>
-						</li>						
-					</ul>
+					<div class="list-group">
+						<a class="list-group-item" href="/DTA-Services/profile/edit">
+							<span class="glyphicon glyphicon-pencil"></span> <spring:message code="page.profile.edit" /></a>
+						</a>
+						<a class="list-group-item list-group-item-danger" href="/DTA-Services/profile/disable">
+							<span class="glyphicon glyphicon-remove"></span> <spring:message code="page.profile.disable" />
+						</a>						
+					</div>
 					
 					
 				</div>
+				
 			</div>
 			<div class="col-sm-6">
 				<div class="panel panel-default">

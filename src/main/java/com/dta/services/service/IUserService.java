@@ -9,4 +9,5 @@ public interface IUserService {
 	public List<User> getAll();
 	public User get(Long id);
 	public User getByLogin(String login);
+	public void updateUser(User user);
 }
