@@ -64,6 +64,7 @@ public class AdvertController {
 	
 	
 	/*Root to listing all adverts*/
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "adverts")
 	public String listAdverts(Model model) {
 

@@ -20,7 +20,7 @@
 				<input class="form-control" type="text" ng-model="advertsController.search.author.login" placeholder="Recherche par author" />
 			</div>
 		</div>
-		<form class="form-horizontal" method="GET" action="/DTA-Services/advert/deleteSelected">
+		<form class="form-horizontal" method="POST" action="/DTA-Services/advert/deleteSelected">
 			<table class="table table-header-clickable row">
 				<thead>
 					<tr>
@@ -47,11 +47,15 @@
 						<td>{{ advert.description }}</td>
 						<td>{{ advert.price }}</td>
 						<td><a href="/DTA-Services/advert/show/{{ advert.id }}/"><span class="glyphicon glyphicon-search"></span></a></td>
-						<td><input type="checkbox" name="{{advert.id}}"></td>
+						<c:if test="${isAdmin }">
+							<td><input type="checkbox" name="{{advert.id}}"></td>
+						</c:if>
 					</tr>
 				</tbody>
 			</table>
-			<button type="submit" class="btn btn-danger">Supprimer sélection</button>
+			<c:if test="${isAdmin }">
+				<button type="submit" class="btn btn-danger">Supprimer sélection</button>
+			</c:if>
 		</form>
 	</div>
 	<c:import url="_FOOTER_.jsp"></c:import>
