@@ -1,5 +1,6 @@
 package com.dta.services.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,8 +55,8 @@ public class User {
 	@NotNull
 	private String country;
 	
-	@OneToMany(mappedBy="author",cascade=CascadeType.PERSIST)
-	private List<Advert> adverts;
+	@OneToMany(mappedBy="author",cascade=CascadeType.ALL)
+	private List<Advert> adverts= new ArrayList<Advert>();
 	
 	private boolean enabled;
 	

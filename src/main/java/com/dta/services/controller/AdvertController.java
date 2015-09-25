@@ -145,7 +145,6 @@ public class AdvertController {
 
 	
 	/*Root to show the complete details of an advert*/
-	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "advert/show/{id}", method = RequestMethod.GET)
 	public String showAdvert(@PathVariable long id, Model model,Principal principal) {
 		
