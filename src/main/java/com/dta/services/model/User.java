@@ -3,6 +3,7 @@ package com.dta.services.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -21,6 +22,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 
 @Entity
+@Cacheable(false)
 public class User {
 
 	/*Attributes*/
