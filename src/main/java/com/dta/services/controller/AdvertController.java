@@ -71,16 +71,16 @@ public class AdvertController {
 	}
 
 	
-	/*Root to show the form add of adverts*/
+	/*root to show the form add of adverts*/
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "advert/new", method = RequestMethod.GET)
-	public String postAdvert(Model model) {
+	public String postAdvert(Model model, Principal principal) {
 
 		List<Category> categories = advertService.getAllCategory();
 		model.addAttribute("categories", categories);
 		
 		model.addAttribute("advert", new Advert());
-
+			
 		return "PostAdvert";
 	}
 
@@ -145,7 +145,6 @@ public class AdvertController {
 
 	
 	/*Root to show the complete details of an advert*/
-	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "advert/show/{id}", method = RequestMethod.GET)
 	public String showAdvert(@PathVariable long id, Model model,Principal principal) {
 		

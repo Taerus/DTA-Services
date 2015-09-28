@@ -23,7 +23,7 @@
 						<div class="col-xs-6 col-sm-8">
 							<h1> ${userProfile.login }</h1>
 							<p>  ${userProfile.email }</p>
-							<p> <strong> ${userProfile.country}, </strong>  ${userProfile.department}</p>
+							<p> <strong> ${userProfile.country.name}, </strong>  ${userProfile.department.name}</p>
 							<p> 
 								<strong> <spring:message code="page.profile.balance" /> : </strong>	
 								<c:if test="${userProfile.balance >=0  }">

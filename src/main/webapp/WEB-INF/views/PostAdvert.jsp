@@ -15,12 +15,11 @@
 
 <header>
 	<c:import url="_HEADER_.jsp" />
-    <div class="container">
-        <h1><spring:message code="page.postAdvert.title" /></h1>
-    </div>
 </header>
 
 <main class="container">
+	<h1 class="h1 text-center text-uppercase"><spring:message code="page.postAdvert.title"></spring:message></h1>
+	<br>
 	<div class="well col-md-offset-2 col-md-8">
 		<f:form class="form-horizontal" modelAttribute="advert" method="POST" action="/DTA-Services/advert/new">
             <div class="form-group">
@@ -30,7 +29,7 @@
 	        	</div>
 		    </div>
 		    <div class="form-group">
-		    	<label class="control-label col-md-2">Catégorie associée : </label>
+		    	<label class="control-label col-md-2"><spring:message code="page.postAdvert.post.category" /></label>
 		    	<div class="col-md-10">
 		    		<f:select class="form-control" path="category.id">
 		    			<c:forEach items="${ categories }" var="ctg">

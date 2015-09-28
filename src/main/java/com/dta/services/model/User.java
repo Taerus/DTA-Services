@@ -1,9 +1,12 @@
 package com.dta.services.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,9 +21,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.eclipse.persistence.annotations.UnionPartitioning;
+import org.hibernate.validator.constraints.Email;
 
 
 @Entity
+@Cacheable(false)
 public class User {
 
 	/*Attributes*/
@@ -28,15 +34,21 @@ public class User {
 	@GeneratedValue
 	private long id;
 	
+	
 	@NotNull
+	@Column(unique=true)
+	@Size(min=6,max=15)
 	private String login;
 	
-	@NotNull	
+	@NotNull
+	@Size(min=6)
 	private String password;
 	
 	private int balance;
 	
 	@NotNull
+	@Email
+	@Size(min=1)
 	private String email;
 	
 	@Enumerated(EnumType.STRING)
@@ -49,13 +61,13 @@ public class User {
 	private Date birth;	
 	
 	@NotNull
-	private String department;
+	private Department department;
 	
 	@NotNull
-	private String country;
+	private Country country;
 	
-	@OneToMany(mappedBy="author",cascade=CascadeType.PERSIST)
-	private List<Advert> adverts;
+	@OneToMany(mappedBy="author",cascade=CascadeType.ALL)
+	private List<Advert> adverts= new ArrayList<Advert>();
 	
 	private boolean enabled;
 	
@@ -81,10 +93,12 @@ public class User {
 		return login;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
 
+	@JsonIgnore
 	public int getBalance() {
 		return balance;
 	}
@@ -92,7 +106,8 @@ public class User {
 	public String getEmail() {
 		return email;
 	}
-
+	
+	@JsonIgnore
 	public Role getRole() {
 		return role;
 	}
@@ -139,19 +154,19 @@ public class User {
 		this.birth = birth;
 	}
 
-	public String getDepartment() {
+	public Department getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(String department) {
+	public void setDepartment(Department department) {
 		this.department = department;
 	}
 
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 
