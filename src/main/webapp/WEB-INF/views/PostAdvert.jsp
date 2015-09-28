@@ -11,7 +11,7 @@
 	<c:import url="_STYLESHEETS_.jsp" />
 	<c:import url="_SCRIPT_.jsp" />
 </head>
-<body>
+<body ng-app="dta-services">
 
 <header>
 	<c:import url="_HEADER_.jsp" />

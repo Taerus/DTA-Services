@@ -6,3 +6,6 @@
 <script src="<spring:url value="/js/ui-bootstrap-tpls-0.13.4.min.js" />"></script>
 
 <script src="<spring:url value="/js/dta-services.js" />"></script>
+<script src="/DTA-Services/js/controller/profile-controller.js"></script>
+<script src="/DTA-Services/js/service/profile-service.js"></script>
+
