@@ -32,6 +32,20 @@ function MessageListController(MessageService, $scope, $location) {
         }
     };
 
+    _this.delete = function() {
+        var id = _this.messages[_this.selectedIdx].id;
+
+        if(_this.tab == 's') {
+            MessageService.deleteSentMessage(id);
+            _this.sent.splice(_this.selectedIdx, 1);
+            _this.select(_this.selectedIdx, 's');
+        } else {
+            MessageService.deleteReceivedMessage(id);
+            _this.received.splice(_this.selectedIdx, 1);
+            _this.select(_this.selectedIdx, 'r');
+        }
+    };
+
     _this.onReceivedSelected = function() {
         _this.select(0, 'r');
         $location.hash('received');
@@ -53,6 +67,7 @@ function MessageListController(MessageService, $scope, $location) {
 
         if(_this.messages) {
             _this.selected = _this.messages[idx];
+            _this.selectedIdx = idx;
         }
     };
 

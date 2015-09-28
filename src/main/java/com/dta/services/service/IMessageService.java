@@ -1,23 +1,22 @@
 package com.dta.services.service;
 
 
-import com.dta.services.model.AdvertMessage;
-import com.dta.services.model.Message;
-import com.dta.services.model.PrivateMessage;
+import com.dta.services.model.*;
 
 import java.util.List;
 
 public interface IMessageService {
 
-    public void postMessage(Message message);
-    public void deleteMessage(long id);
+    void postMessage(Message message);
+    void deleteMessage(long id);
+    void deleteSentMessage(long id);
+    void deleteReceivedMessage(long id);
 
-    public PrivateMessage getPrivateMessage(long id);
-    public List<PrivateMessage> listSentPrivateMessages(long senderId);
-    public List<PrivateMessage> listReceivedPrivateMessages(long receiverId);
+    PrivateMessage getPrivateMessage(long id);
+    List<SentMessage> listSentPrivateMessages(long senderId);
+    List<ReceivedMessage> listReceivedPrivateMessages(long receiverId);
 
-    public AdvertMessage getAdvertMessage(long id);
-    public List<AdvertMessage> listSentAdvertMessages(long senderId);
-    public List<AdvertMessage> listReceivedAdvertMessages(long receiverId);
-
+    AdvertMessage getAdvertMessage(long id);
+    List<AdvertMessage> listSentAdvertMessages(long senderId);
+    List<AdvertMessage> listReceivedAdvertMessages(long receiverId);
 }

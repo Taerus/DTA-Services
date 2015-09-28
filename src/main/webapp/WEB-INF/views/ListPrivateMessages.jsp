@@ -9,8 +9,9 @@
     <title><spring:message code="page.listPrivateMessage.title"/></title>
     <c:import url="_STYLESHEETS_.jsp"/>
     <c:import url="_SCRIPT_.jsp"/>
-    <script src="<spring:url value="/js/service/message-service.js" />"></script>
     <script src="<spring:url value="/js/filter/message-filter.js" />"></script>
+    <script src="<spring:url value="/js/service/message-service.js" />"></script>
+    <script src="<spring:url value="/js/controller/message-controller.js" />"></script>
 </head>
 <body ng-app="dta-services">
 
@@ -28,30 +29,30 @@
             <tab heading="Messages reçus" select="ctrl.onReceivedSelected()" active="ctrl.receivedTab">
                 <div class="list-group">
                     <a class="list-group-item" href="#" class="btn-link"
-                       ng-class="{'active':message.id == ctrl.selected.id}"
+                       ng-class="{'active':receivedMsg.message.id == ctrl.selected.message.id}"
                        ng-click="ctrl.select($index)"
-                       ng-repeat="message in ctrl.received track by $index">
+                       ng-repeat="receivedMsg in ctrl.received track by $index">
                             <span style="display: inline-block; width: 8em">
-                                {{ message.author.login }}</span>
+                                {{ receivedMsg.message.author.login }}</span>
                             <span style="border-left:1px solid #ddd; padding-left:1em;">
-                                {{ message.title }}</span>
+                                {{ receivedMsg.message.title }}</span>
                             <span class="pull-right">
-                                {{ message.creationDate | msgDate }}</span>
+                                {{ receivedMsg.message.creationDate | msgDate }}</span>
                     </a>
                 </div>
             </tab>
             <tab heading="Messages envoyés" select="ctrl.onSentSelected()" active="ctrl.sentTab">
                 <div class="list-group">
                     <a class="list-group-item" href="#" class="btn-link"
-                       ng-class="{'active':message.id == ctrl.selected.id}"
+                       ng-class="{'active':sentMsg.message.id == ctrl.selected.message.id}"
                        ng-click="ctrl.select($index)"
-                       ng-repeat="message in ctrl.sent track by $index">
+                       ng-repeat="sentMsg in ctrl.sent track by $index">
                             <span style="display: inline-block; width: 8em">
-                                {{ message.targets[0].login }}</span>
+                                {{ sentMsg.message.targets[0].login }}</span>
                             <span style="border-left:1px solid #ddd; padding-left:1em;">
-                                {{ message.title }}</span>
+                                {{ sentMsg.message.title }}</span>
                             <span class="pull-right">
-                                {{ message.creationDate | msgDate }}</span>
+                                {{ sentMsg.message.creationDate | msgDate }}</span>
                     </a>
                 </div>
             </tab>
@@ -66,20 +67,20 @@
                    href="<spring:url value="/message/new" />?to={{ ctrl.selected.author.id }}&re={{ ctrl.selected.id }}">
                     <spring:message code="page.listPrivateMessage.control.respond" />
                 </a>
-                <button class="btn btn-danger">
+                <button class="btn btn-danger" ng-click="ctrl.delete()">
                     <spring:message code="page.listPrivateMessage.control.delete" />
                 </button>
             </div>
             <div class="panel panel-primary">
-                <div class="panel-heading">{{ ctrl.selected.title }}
-                    <span class="pull-right">{{ ctrl.selected.creationDate | msgDate }}</span>
+                <div class="panel-heading">{{ ctrl.selected.message.title }}
+                    <span class="pull-right">{{ ctrl.selected.message.creationDate | msgDate }}</span>
                 </div>
                 <div class="panel-body">
                     <p>
-                        <strong>{{ ctrl.selected.author.login }}</strong><br>
-                        pour : {{ ctrl.selected.targets[0].login }}
+                        <strong>{{ ctrl.selected.message.author.login }}</strong><br>
+                        pour : {{ ctrl.selected.message.targets[0].login }}
                         <hr>
-                        <span style="white-space: pre-wrap">{{ ctrl.selected.content }}</span>
+                        <span style="white-space: pre-wrap">{{ ctrl.selected.message.content }}</span>
                     </p>
                 </div>
             </div>
@@ -91,8 +92,6 @@
 <footer>
     <c:import url="_FOOTER_.jsp"/>
 </footer>
-
-<script src="<spring:url value="/js/controller/message-controller.js" />"></script>
 
 </body>
 </html>

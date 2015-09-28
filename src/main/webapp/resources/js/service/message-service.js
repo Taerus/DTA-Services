@@ -16,6 +16,14 @@ function MessageService($http) {
         return $http.get(API + "/user/" + userId + "/message/sent");
     };
 
+    service.deleteReceivedMessage = function(id) {
+        $http.delete(API + "/message/received/" + id);
+    };
+
+    service.deleteSentMessage = function(id) {
+        $http.delete(API + "/message/sent/" + id);
+    };
+
     return service;
 
 }

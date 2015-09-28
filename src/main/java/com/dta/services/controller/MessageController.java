@@ -1,6 +1,7 @@
 package com.dta.services.controller;
 
 import com.dta.services.model.PrivateMessage;
+import com.dta.services.model.SentMessage;
 import com.dta.services.model.User;
 import com.dta.services.service.IMessageService;
 import com.dta.services.service.IUserService;
@@ -81,8 +82,6 @@ public class MessageController {
         message.setTitle(messageForm.getSubject());
         message.setContent(messageForm.getContent());
         messageService.postMessage(message);
-
-        System.out.println(message.getTargets());
 
         return "redirect:/user/messages";
     }

@@ -1,17 +1,13 @@
 package com.dta.services.controller;
 
-import com.dta.services.model.Advert;
-import com.dta.services.model.PrivateMessage;
-import com.dta.services.model.User;
+import com.dta.services.model.*;
 import com.dta.services.service.IAdvertService;
 import com.dta.services.service.IMessageService;
 import com.dta.services.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,14 +38,26 @@ public class RestController {
 
 	@RequestMapping(value = "/user/{user_id}/message/received", method = RequestMethod.GET)
 	@ResponseBody
-	public List<PrivateMessage> getUserReceivedMessages(@PathVariable("user_id") long userId) {
+	public List<ReceivedMessage> getUserReceivedMessages(@PathVariable("user_id") long userId) {
 		return messageService.listReceivedPrivateMessages(userId);
 	}
 
 	@RequestMapping(value = "/user/{user_id}/message/sent", method = RequestMethod.GET)
 	@ResponseBody
-	public List<PrivateMessage> getUserSentMessages(@PathVariable("user_id") long userId) {
+	public List<SentMessage> getUserSentMessages(@PathVariable("user_id") long userId) {
 		return messageService.listSentPrivateMessages(userId);
 	}
+
+	@RequestMapping(value = "/message/sent/{id}")
+    @ResponseStatus(HttpStatus.OK)
+	public void deleteSentMessage(@PathVariable("id") long id) {
+		messageService.deleteSentMessage(id);
+	}
+
+    @RequestMapping(value = "/message/received/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteReceivedMessage(@PathVariable("id") long id) {
+        messageService.deleteReceivedMessage(id);
+    }
 	
 }
