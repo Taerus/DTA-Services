@@ -237,4 +237,11 @@ public class AdminController {
     	model.addAttribute("isAdmin",true);
     	return "Userdetails";
     }
+	
+	@RequestMapping(value = "/user/delete/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public String deleteUser(@PathVariable long id, Model model, Principal principal) {
+
+		return "Usersview";
+	}
 }

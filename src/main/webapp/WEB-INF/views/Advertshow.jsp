@@ -33,7 +33,7 @@
 			  	</ul>
 			</div>
 			
-			<c:if test="${isAuthor }">
+ 			<c:if test="${isAuthor || isAdmin }">
 				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAdvert"><spring:message code="page.advertShow.advert.delete"></spring:message></button>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editAdvert"><spring:message code="page.advertShow.advert.update"></spring:message></button>
 			</c:if>
