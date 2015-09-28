@@ -6,23 +6,41 @@ function MessageListController(MessageService, $scope, $location) {
     var _this = this;
 
     _this.load = function(userId) {
-        MessageService.getReceivedMessages(userId).then(function(result) {
-            _this.received = sortMessage(result.data);
-            _this.select(0, 'r');
-        });
+        var sentReq = MessageService.getSentMessages(userId);
+        var receivedReq = MessageService.getReceivedMessages(userId);
 
-        MessageService.getSentMessages(userId).then(function(result) {
+        if($location.hash() == "sent") {
+            sentReq.then(function(result) {
+                sent(result);
+                _this.onSentSelected();
+            });
+            receivedReq.then(received);
+        } else {
+            receivedReq.then(function(result) {
+                received(result);
+                _this.onReceivedSelected();
+            });
+            sentReq.then(sent);
+        }
+
+        function received(result) {
+            _this.received = sortMessage(result.data);
+        }
+
+        function sent(result) {
             _this.sent = sortMessage(result.data);
-        });
+        }
     };
 
     _this.onReceivedSelected = function() {
         _this.select(0, 'r');
+        $location.hash('received');
         _this.tab = 'r';
     };
 
     _this.onSentSelected = function() {
         _this.select(0, 's');
+        $location.hash('sent');
         _this.tab = 's';
     };
 
@@ -46,11 +64,11 @@ function MessageListController(MessageService, $scope, $location) {
     };
 
     $scope.$watch(function () {
-        return $location.url();
+        return $location.hash();
     }, function (value) {
-        if(value == '/received') {
+        if(value == 'received') {
             _this.setTab('r');
-        } else if(value == '/sent') {
+        } else if(value == 'sent') {
             _this.setTab('s');
         }
     });

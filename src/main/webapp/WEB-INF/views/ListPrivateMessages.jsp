@@ -11,7 +11,6 @@
     <c:import url="_SCRIPT_.jsp"/>
     <script src="<spring:url value="/js/service/message-service.js" />"></script>
     <script src="<spring:url value="/js/filter/message-filter.js" />"></script>
-    <script src="<spring:url value="/js/controller/message-controller.js" />"></script>
 </head>
 <body ng-app="dta-services">
 
@@ -89,12 +88,11 @@
     </div>
 </main>
 
-<a href="#sent">sent</a>
-<a href="#received">received</a>
-
 <footer>
     <c:import url="_FOOTER_.jsp"/>
 </footer>
+
+<script src="<spring:url value="/js/controller/message-controller.js" />"></script>
 
 </body>
 </html>
