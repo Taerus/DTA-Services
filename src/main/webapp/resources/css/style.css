@@ -4,6 +4,9 @@
 .table-header-clickable thead th:hover{
 	color:#000;
 }
+.table-row-clickable tbody tr{
+	cursor:pointer;
+}
 .nav-action{
 	margin-right:50px;
 }

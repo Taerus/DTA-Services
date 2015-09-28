@@ -58,45 +58,69 @@
 	      <div class="modal-body">		        
         	<div class="form-group">
         		<label class="control-label col-sm-3"><spring:message code="page.header.modal.register.login"></spring:message></label>
-        		<div class="col-sm-7">
+        		<div class="col-sm-9">
         			<f:input class="form-control" path="login" type="text" />
-        		</div>
-        		<div class="col-sm-2 control-label text-danger">
-        			<f:errors path="login" />
-        		</div>	        		
+        		</div>        				
+        	</div>
+        	<div class="form-group">
+	        	<div class="col-sm-9 col-sm-offset-3 control-label text-danger">
+	        		<f:errors path="login" />
+	       		</div>        		
         	</div>
         	<div class="form-group">
         		<label class="control-label col-sm-3"><spring:message code="page.header.modal.register.password"></spring:message></label>
-        		<div class="col-sm-7">
+        		<div class="col-sm-9">
         			<f:input class="form-control" path="password" type="password" />
-        		</div>
-        		<div class="col-sm-2 control-label text-danger">
-        			<f:errors path="password" />
-        		</div>	        		
+        		</div>        		       		
+        	</div>
+        	<div class="form-group">
+	        	<div class="col-sm-9 col-sm-offset-3 control-label text-danger">
+	        		<f:errors path="password" />
+	       		</div>        		
         	</div>
         	<div class="form-group">
         		<label class="control-label col-sm-3"><spring:message code="page.header.modal.register.email" ></spring:message></label>
-        		<div class="col-sm-7">
-        			<f:input class="form-control" path="email" type="email" />
-        		</div>
-        		<div class="col-sm-2 control-label text-danger">
-        			<f:errors path="email" />
-        		</div>	        		
+        		<div class="col-sm-9">
+        			<f:input class="form-control" path="email"  />
+        		</div>        		       		
         	</div>
         	<div class="form-group">
+	        	<div class="col-sm-9 col-sm-offset-3 control-label text-danger">
+	        		<f:errors path="email" />
+	       		</div>        		
+        	</div>
+        	<div class="form-group">        		
+        		<label class="col-sm-3 control-label" >
+        			<spring:message code="page.header.modal.register.country" ></spring:message>
+        		</label>
+        		<div class="col-sm-3">
+        			<f:select path="country" class="form-control"  >
+        				<f:options items="${com.dta.services.model.Country.values() }" itemLabel="name" />
+        			</f:select>
+        		</div> 
         		<label class="col-sm-3 control-label" >
         			<spring:message code="page.header.modal.register.department" ></spring:message>
         		</label>
         		<div class="col-sm-3">
-        			<f:input path="department" class="form-control"/>
-        		</div>
-        		<label class="col-sm-1 control-label" >
-        			<spring:message code="page.header.modal.register.country" ></spring:message>
-        		</label>
-        		<div class="col-sm-3">
-        			<f:input path="country" class="form-control"/>
+        			<f:select path="department" class="form-control"     >
+        				<f:options items="${com.dta.services.model.Department.values() }" itemLabel="name" />
+        			</f:select>
+        		</div>      		
+        	</div>
+        	<div class="form-group">
+        		<div class="col-sm-6 text-danger">
+        			<f:errors path="country"  />      		
+        		</div> 
+        		<div class="col-sm-6 text-danger">
+        			<f:errors path="department" />
         		</div>       		
-        	</div>	       				       
+        		
+        	</div>
+        	<c:if test="${errorMessage != null }">
+	        	<div class="alert alert-danger">
+	        		<spring:message code="page.header.modal.register.error.login" />
+	        	</div>
+        	</c:if>	       				       
 	      </div>
 	      <div class="modal-footer">
 	        	<button type="submit" class="btn btn-success"><spring:message code="page.header.modal.register.submit" /></button>

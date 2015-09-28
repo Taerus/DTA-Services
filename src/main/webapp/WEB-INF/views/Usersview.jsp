@@ -10,19 +10,19 @@
 	<c:import url="_SCRIPT_.jsp"></c:import>
 	<script src="/DTA-Services/js/dta_services_users.js"></script>
 </head>
-<body ng-app="dta_services_users">
+<body >
 	<header>
 		<c:import url="_HEADER_.jsp"></c:import>
 	</header>
-	<main class="container" ng-controller="UsersController as usersController">
+	<main ng-app="dta_services_users" class="container" ng-controller="UsersController as usersController">
 		<div class="form-inline">
 			<div class="form-group">
 				<input class="form-control" type="text" ng-model="usersController.search.login" placeholder="<spring:message code="page.users.search" />"/>
 			</div>
 		</div>
-		<table class="table table-striped table-header-clickable">
+		<table class="table table-hover table-header-clickable table-row-clickable">
 			<thead>
-				<tr>
+				<tr >
 					<th ng-click="usersController.setPredicate('login')">																			
 						<spring:message code="page.users.login" />						 
 						<span ng-if="usersController.predicate==='login'" class="glyphicon glyphicon-chevron-down"></span>
@@ -43,7 +43,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="user in usersController.users | filter:usersController.search | orderBy:usersController.predicate">
+				<tr class="clickable" ng-repeat="user in usersController.users | filter:usersController.search | orderBy:usersController.predicate" 
+					ng-click="usersController.redirectTo(user.id)">
 					<td>{{user.login}}</td>
 					<td>{{user.email}}</td>
 					<td>{{user.country}}</td>
@@ -53,7 +54,7 @@
 		</table>
 	</main>
 	<footer>
-		<c:import url="_FOOTER_.jsp"></c:import>
+		<c:import url="_FOOTER_.jsp"></c:import>		
 	</footer>
 </body>
 </html>
