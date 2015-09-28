@@ -1,19 +1,19 @@
 package com.dta.services.controller;
 
-import java.security.Principal;
-import java.util.List;
-
-import com.dta.services.model.PrivateMessage;
-import com.dta.services.model.*;
+import com.dta.services.model.Advert;
+import com.dta.services.model.ReceivedMessage;
+import com.dta.services.model.SentMessage;
+import com.dta.services.model.User;
 import com.dta.services.service.IAdvertService;
 import com.dta.services.service.IMessageService;
 import com.dta.services.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller

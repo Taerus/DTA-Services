@@ -6,17 +6,17 @@
 
 <nav class="navbar navbar-default" >
 	<div class="container-fluid">
-		<a class="navbar-brand" href="/DTA-Services"><spring:message code="page.header.title"></spring:message></a>
+		<a class="navbar-brand" href="/DTA-Services"><spring:message code="page.header.title" /></a>
 		<s:authorize access="hasRole('USER') or isAnonymous()">
 			<ul class="nav navbar-nav">
-				<li><a href="/DTA-Services/users/"><spring:message code="page.header.users"></spring:message></a></li>
-				<li><a href="/DTA-Services/adverts/"><spring:message code="page.header.adverts"></spring:message></a></li>
+				<li><a href="/DTA-Services/users/"><spring:message code="page.header.users" /></a></li>
+				<li><a href="/DTA-Services/adverts/"><spring:message code="page.header.adverts" /></a></li>
 			</ul>
 		</s:authorize>
 		<s:authorize access="hasRole('ADMIN')">
 			<ul class="nav navbar-nav">
-				<li><a href="/DTA-Services/admin/users/"><spring:message code="page.header.users"></spring:message></a></li>
-				<li><a href="/DTA-Services/admin/adverts/"><spring:message code="page.header.adverts"></spring:message></a></li>
+				<li><a href="/DTA-Services/admin/users/"><spring:message code="page.header.users" /></a></li>
+				<li><a href="/DTA-Services/admin/adverts/"><spring:message code="page.header.adverts" /></a></li>
 			</ul>
 		</s:authorize>
 		
@@ -51,8 +51,8 @@
 		
 		<s:authorize access="isAnonymous()">
 			<form class="navbar-form navbar-right" action="<spring:url value="/j_spring_security_check" />" method="POST">
-				<input class="form-control" name="j_username" type="text" placeholder="<spring:message code="page.header.login"></spring:message>"/>
-				<input class="form-control" name="j_password" type="password" placeholder="<spring:message code="page.header.password"></spring:message>" />
+				<input class="form-control" name="j_username" type="text" placeholder="<spring:message code="page.header.login" />"/>
+				<input class="form-control" name="j_password" type="password" placeholder="<spring:message code="page.header.password" />" />
 				<button type="submit" class="btn btn-success"><spring:message code="page.header.signin" /></button>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" ><spring:message code="page.header.register" /></button>								
 			</form>
@@ -69,7 +69,7 @@
       <f:form class="form-horizontal" modelAttribute="user" method="POST" action="${pageContext.request.contextPath }/register">
 	      <div class="modal-body">		        
         	<div class="form-group">
-        		<label class="control-label col-sm-3"><spring:message code="page.header.modal.register.login"></spring:message></label>
+        		<label class="control-label col-sm-3"><spring:message code="page.header.modal.register.login" /></label>
         		<div class="col-sm-6">
         			<f:input class="form-control" path="login" type="text" />
         		</div>
@@ -79,7 +79,7 @@
         	</div>
         	
         	<div class="form-group">
-        		<label class="control-label col-sm-3"><spring:message code="page.header.modal.register.password"></spring:message></label>
+        		<label class="control-label col-sm-3"><spring:message code="page.header.modal.register.password" /></label>
         		<div class="col-sm-6">
         			<f:input class="form-control" path="password" type="password" />
         		</div>  
@@ -89,7 +89,7 @@
         	</div>
         	
         	<div class="form-group">
-        		<label class="control-label col-sm-3"><spring:message code="page.header.modal.register.email" ></spring:message></label>
+        		<label class="control-label col-sm-3"><spring:message code="page.header.modal.register.email" /></label>
         		<div class="col-sm-6">
         			<f:input class="form-control" path="email"  />
         		</div>
@@ -100,19 +100,19 @@
         	
         	<div class="form-group">        		
         		<label class="col-sm-3 control-label" >
-        			<spring:message code="page.header.modal.register.country" ></spring:message>
+        			<spring:message code="page.header.modal.register.country" />
         		</label>
         		<div class="col-sm-2">
         			<f:select path="country" class="form-control"  >
-        				<f:options items="${com.dta.services.model.Country.values() }" itemLabel="name" />
+        				<f:options items="${com.dta.services.model.Country.values}" itemLabel="name" />
         			</f:select>
         		</div> 
         		<label class="col-sm-2 control-label" >
-        			<spring:message code="page.header.modal.register.department" ></spring:message>
+        			<spring:message code="page.header.modal.register.department" />
         		</label>
         		<div class="col-sm-2">
         			<f:select path="department" class="form-control"     >
-        				<f:options items="${com.dta.services.model.Department.values() }" itemLabel="name" />
+        				<f:options items="${com.dta.services.model.Department.values}" itemLabel="name" />
         			</f:select>
         		</div>      		
         	</div>
