@@ -31,7 +31,7 @@ public class RestController {
 	@Autowired
 	private IMessageService messageService;
 	
-	@RequestMapping("/users")
+	@RequestMapping(value="/users", method = RequestMethod.GET)
 	@ResponseBody
 	public List<User> getAllUsers(){
 		return userService.getAll();

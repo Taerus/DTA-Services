@@ -40,6 +40,9 @@
 					</th>
 					<th>
 					</th>
+					<c:if test="${isAdmin }">
+						<th class="col-md-1"></th>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody>
@@ -49,6 +52,9 @@
 					<td>{{user.email}}</td>
 					<td>{{user.country}}</td>
 					<td><a href="/DTA-Services/user/{{user.id}}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+					<c:if test="${isAdmin }">
+						<td><input type="checkbox" name="{{user.id}}"></td>
+					</c:if>
 				</tr>
 			</tbody>
 		</table>
