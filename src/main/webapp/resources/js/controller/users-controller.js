@@ -1,6 +1,4 @@
-angular.module("dta_services_users",[]);
-
-angular.module("dta_services_users").controller("UsersController",['UsersService','$window',function(UsersService,$window){
+angular.module("dta-services").controller("UsersController",['UsersService','$window',function(UsersService,$window){
 	var usersController = this;
 	
 	UsersService.getAll().then(function(data){
@@ -21,17 +19,4 @@ angular.module("dta_services_users").controller("UsersController",['UsersService
 	}
 	
 	
-}]);
-
-angular.module("dta_services_users").factory("UsersService",['$http',function($http){
-	var usersService = this;
-	
-	usersService.getAll = function(){
-		return $http.get("/DTA-Services/API/users").then(function(response){
-			return response.data;
-		});
-	}
-	
-	
-	return usersService;
 }]);

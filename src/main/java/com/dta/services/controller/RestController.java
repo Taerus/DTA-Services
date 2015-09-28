@@ -1,10 +1,13 @@
 package com.dta.services.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import com.dta.services.model.PrivateMessage;
 import com.dta.services.service.IMessageService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
@@ -54,5 +57,13 @@ public class RestController {
 	public List<PrivateMessage> getUserSentMessages(@PathVariable("user_id") long userId) {
 		return messageService.listSentPrivateMessages(userId);
 	}
+	
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@RequestMapping(value="/user/balance", method=RequestMethod.GET)
+	@ResponseBody
+	public int getBalance(Principal principal){
+		return userService.getByLogin(principal.getName()).getBalance();
+	}
+	
 	
 }

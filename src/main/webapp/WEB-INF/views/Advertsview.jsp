@@ -9,9 +9,10 @@
 	<title><spring:message code="page.advertsview.title"></spring:message></title>
 	<c:import url="_STYLESHEETS_.jsp"></c:import>
 	<c:import url="_SCRIPT_.jsp"></c:import>
-	<script src="/DTA-Services/js/dta_services.js"></script>
+	<script src="/DTA-Services/js/controller/adverts-controller.js"></script>
+	<script src="/DTA-Services/js/service/adverts-service.js"></script>
 </head>
-<body ng-app="dta_services">
+<body ng-app="dta-services">
 	<header>
 		<c:import url="_HEADER_.jsp"></c:import>
 	</header>

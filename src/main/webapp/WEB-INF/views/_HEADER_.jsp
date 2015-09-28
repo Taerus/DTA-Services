@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-controller="ProfileController as profileController">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/DTA-Services"><spring:message code="page.header.title"></spring:message></a>
 		<s:authorize access="hasRole('USER') or isAnonymous()">
@@ -23,21 +23,26 @@
 
 		<s:authorize access="hasAnyRole('USER','ADMIN')">					
 			
-			<div class="navbar-form navbar-right">
+			<div class="navbar-form navbar-right" >
 				<span class="nav-action">					
 					<a href="/DTA-Services/advert/new/" class="btn btn-warning" role="button"><spring:message code="page.header.postAdvert" /></a>
 				</span>
 				
-				<div class="btn-group dropdown">
-					<button class="btn" ><s:authentication property="principal.username"/> </button>
-					<button class="btn dropdown-toggle" data-toggle="dropdown" > <span class="caret"></span> </button>
+				<div class="btn-group dropdown nav-action">
+					<button class="btn btn-info name-button" ng-class="{'btn-danger' : profileController.balance < 0}">
+						{{ profileController.balance }} <span class="glyphicon glyphicon-bitcoin"></span>
+					</button>
+					<a  href="<spring:url value="/profile" />" class="btn name-button" ><s:authentication property="principal.username"/> </a>
+					<button class="btn name-button dropdown-toggle" data-toggle="dropdown" > <span class="caret"></span> </button>
+					
 					<ul class="dropdown-menu">
-			            <li><a href="/DTA-Services/profile"><span class="glyphicon glyphicon-user"></span> <spring:message code="page.header.profile" /></a></li>
-			            <li><a href="/DTA-Services/user/messages"><span class="glyphicon glyphicon-envelope"></span> <spring:message code="page.header.inbox" /></a></li>		            
+			            <li><a href="<spring:url value="/profile" />"><span class="glyphicon glyphicon-user"></span> <spring:message code="page.header.profile" /></a></li>
+			            <li><a href="<spring:url value="/user/messages" />"><span class="glyphicon glyphicon-envelope"></span> <spring:message code="page.header.inbox" /></a></li>		            
 		          	</ul>
+		          
 	          	</div>	
-	          	<span class="nav-action">
-					<a class="btn btn-danger" href="/DTA-Services/j_spring_security_logout" ><span class="glyphicon glyphicon-log-out"></span></a>
+	          	<span >
+					<a class="btn btn-danger" href="<spring:url value="/j_spring_security_logout" />" ><span class="glyphicon glyphicon-log-out"></span></a>
 				</span>
 
 			</div>
@@ -45,7 +50,7 @@
 		</s:authorize>
 		
 		<s:authorize access="isAnonymous()">
-			<form class="navbar-form navbar-right" action="/DTA-Services/j_spring_security_check" method="POST">
+			<form class="navbar-form navbar-right" action="<spring:url value="/j_spring_security_check" />" method="POST">
 				<input class="form-control" name="j_username" type="text" placeholder="<spring:message code="page.header.login"></spring:message>"/>
 				<input class="form-control" name="j_password" type="password" placeholder="<spring:message code="page.header.password"></spring:message>" />
 				<button type="submit" class="btn btn-success"><spring:message code="page.header.signin" /></button>
@@ -61,7 +66,7 @@
       <div class="modal-header">
         <h1><spring:message code="page.header.modal.register.title" /></h1>
       </div>
-      <f:form class="form-horizontal" modelAttribute="user" method="POST" action="/DTA-Services/register">
+      <f:form class="form-horizontal" modelAttribute="user" method="POST" action="${pageContext.request.contextPath }/register">
 	      <div class="modal-body">		        
         	<div class="form-group">
         		<label class="control-label col-sm-3"><spring:message code="page.header.modal.register.login"></spring:message></label>

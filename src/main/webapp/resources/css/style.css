@@ -10,3 +10,9 @@
 .nav-action{
 	margin-right:50px;
 }
+.name-button{
+	border:#AAA solid 1px;
+}
+.name-button:hover{
+	background-color:rgba(0,0,0,0.2);
+}
