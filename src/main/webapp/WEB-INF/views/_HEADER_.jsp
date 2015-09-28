@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 
-<nav class="navbar navbar-default" ng-controller="ProfileController as profileController">
+<nav class="navbar navbar-default" >
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/DTA-Services"><spring:message code="page.header.title"></spring:message></a>
 		<s:authorize access="hasRole('USER') or isAnonymous()">
@@ -23,14 +23,14 @@
 
 		<s:authorize access="hasAnyRole('USER','ADMIN')">					
 			
-			<div class="navbar-form navbar-right" >
+			<div class="navbar-form navbar-right" ng-controller="ProfileController as profileController" >
 				<span class="nav-action">					
 					<a href="/DTA-Services/advert/new/" class="btn btn-warning" role="button"><spring:message code="page.header.postAdvert" /></a>
 				</span>
 				
 				<div class="btn-group dropdown nav-action">
 					<button class="btn btn-info name-button" ng-class="{'btn-danger' : profileController.balance < 0}">
-						{{ profileController.balance }} <span class="glyphicon glyphicon-bitcoin"></span>
+						{{ profileController.balance | currency }} 
 					</button>
 					<a  href="<spring:url value="/profile" />" class="btn name-button" ><s:authentication property="principal.username"/> </a>
 					<button class="btn name-button dropdown-toggle" data-toggle="dropdown" > <span class="caret"></span> </button>
