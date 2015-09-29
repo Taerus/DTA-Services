@@ -17,7 +17,7 @@ public class TestDao {
 	public void Dao() {
 		IUserDao userDao = (IUserDao) context.getBean("userDao");
 
-		userDao.create(new User("caca", "pass", 0, "caca@prout.com", Role.ADMINISTRATOR));
+		userDao.create(new User("caca", "pass", 0, "caca@prout.com", Role.ADMIN));
 		
 	}
 
