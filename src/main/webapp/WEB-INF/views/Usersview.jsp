@@ -8,13 +8,14 @@
 	<title><spring:message code="page.users.title"></spring:message></title>
 	<c:import url="_STYLESHEETS_.jsp"></c:import>
 	<c:import url="_SCRIPT_.jsp"></c:import>
-	<script src="/DTA-Services/js/dta_services_users.js"></script>
+	<script src="/DTA-Services/js/controller/users-controller.js"></script>
+	<script src="/DTA-Services/js/service/users-service.js"></script>
 </head>
-<body >
+<body ng-app="dta-services" >
 	<header>
 		<c:import url="_HEADER_.jsp"></c:import>
 	</header>
-	<main ng-app="dta_services_users" class="container" ng-controller="UsersController as usersController">
+	<main class="container" ng-controller="UsersController as usersController">
 		<h1 class="h1 text-center text-uppercase"><spring:message code="page.usersview.title"></spring:message></h1>
 		<br>
 		<div class="form-inline">

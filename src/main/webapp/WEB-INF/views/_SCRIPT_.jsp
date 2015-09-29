@@ -4,3 +4,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 
 <script src="/DTA-Services/js/dta-services.js"></script>
+<script src="/DTA-Services/js/controller/profile-controller.js"></script>
+<script src="/DTA-Services/js/service/profile-service.js"></script>
